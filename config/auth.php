@@ -16,6 +16,8 @@ return [
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
+        'admins' => 'admins',
+
     ],
 
     /*
@@ -63,6 +65,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
