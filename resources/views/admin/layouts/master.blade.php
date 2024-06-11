@@ -10,7 +10,8 @@
         @include("admin.layouts.main-sidebar")
         <!-- Main Content -->
         <div class="main-content">
-            @yield('content')        </div>
+            @yield('content')
+        </div>
         @include('admin.layouts.main-footer')
     </div>
 </div>
