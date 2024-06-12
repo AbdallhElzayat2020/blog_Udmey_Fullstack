@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login Pge</title>
+    <title>Forgot Password Page</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{asset('admin/assets/modules/bootstrap/css/bootstrap.min.css')}}">
@@ -28,7 +28,8 @@
 
         gtag('config', 'UA-94034622-3');
     </script>
-    <!-- /END GA --></head>
+    <!-- /END GA -->
+</head>
 
 <body>
 <div id="app">
@@ -41,10 +42,23 @@
                              class="shadow-light rounded-circle">
                     </div>
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Login</h4></div>
-
+                        <div class="card-header"><h4>Forgot Password</h4></div>
                         <div class="card-body">
-                            <form method="POST" action="{{route('admin.handle-login')}}" class="needs-validation"
+                            <p>
+                                Forgot your password? No problem. Just let us know your email address and we will email
+                                you
+                                a password reset link that will allow you to choose a new one.
+                            </p>
+                            <br>
+                            @if(session()->has('success'))
+                                <i>
+                                    <b style="color: green" class="text-center font-weight-bold">
+                                        {{ session()->get('success') }}
+                                    </b>
+                                </i>
+                            @endif
+                            <form method="POST" action="{{route('admin.forgot-password.send')}}"
+                                  class="needs-validation"
                                   novalidate="">
                                 @csrf
                                 @method('POST')
@@ -62,41 +76,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="d-block">
-                                        <label for="password" class="control-label">Password</label>
-                                        <div class="float-right">
-                                            <a href="{{route('admin.forgot-password')}}" class="text-small">
-                                                Forgot Password?
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <input id="password" value="{{ old('password') }}" type="password"
-                                           class="form-control" name="password"
-                                           tabindex="2" required>
-                                    @error('password')
-                                    <code class="text-danger">{{ $message }}</code>
-                                    @enderror
-                                    <div class="invalid-feedback">
-                                        please fill in your password
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
-                                               id="remember-me">
-                                        <label class="custom-control-label" for="remember-me">Remember Me</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                        Login
+                                        Send Password Reset Link
                                     </button>
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
 

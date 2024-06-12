@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login Pge</title>
+    <title>Forgot Password Page</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{asset('admin/assets/modules/bootstrap/css/bootstrap.min.css')}}">
@@ -41,18 +41,20 @@
                              class="shadow-light rounded-circle">
                     </div>
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Login</h4></div>
-
+                        <div class="card-header"><h4>Reset Password</h4></div>
                         <div class="card-body">
-                            <form method="POST" action="{{route('admin.handle-login')}}" class="needs-validation"
+                            <form method="POST" action="{{route('admin.reset-password.send')}}"
+                                  class="needs-validation"
                                   novalidate="">
                                 @csrf
                                 @method('POST')
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input id="email" value="{{ old('email') }}" type="email" class="form-control"
+                                    <input id="email" value="{{@request()->email }}" type="email"
+                                           class="form-control"
                                            name="email" tabindex="1"
                                            required autofocus>
+{{--                                    <input type="hidden" name="token" value="{{@request()->token }}">--}}
                                     @error('email')
                                     <code class="text-danger">{{ $message }}</code>
                                     @enderror
@@ -60,43 +62,38 @@
                                         Please fill in your email
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <div class="d-block">
-                                        <label for="password" class="control-label">Password</label>
-                                        <div class="float-right">
-                                            <a href="{{route('admin.forgot-password')}}" class="text-small">
-                                                Forgot Password?
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <label for="password">Password</label>
                                     <input id="password" value="{{ old('password') }}" type="password"
-                                           class="form-control" name="password"
-                                           tabindex="2" required>
+                                           class="form-control"
+                                           name="password" tabindex="1"
+                                           required autofocus>
                                     @error('password')
                                     <code class="text-danger">{{ $message }}</code>
                                     @enderror
                                     <div class="invalid-feedback">
-                                        please fill in your password
+                                        Please fill in your password
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
-                                               id="remember-me">
-                                        <label class="custom-control-label" for="remember-me">Remember Me</label>
+                                    <label for="password">Password Confirmation</label>
+                                    <input id="password" value="{{ old('password_confirmation') }}" type="password"
+                                           class="form-control"
+                                           name="password_confirmation" tabindex="1"
+                                           required autofocus>
+
+                                    <div class="invalid-feedback">
+                                        Please fill in your password confirmation
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                        Login
+                                        Send Password Reset Link
                                     </button>
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
 
