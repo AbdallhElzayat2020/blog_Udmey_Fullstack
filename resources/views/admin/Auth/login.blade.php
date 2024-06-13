@@ -42,8 +42,12 @@
                     </div>
                     <div class="card card-primary">
                         <div class="card-header"><h4>Login</h4></div>
-
                         <div class="card-body">
+                            @if(session()->has('success'))
+                                <i>
+                                    <b style="color: green">{{ session()->get('success') }}</b>
+                                </i>
+                            @endif
                             <form method="POST" action="{{route('admin.handle-login')}}" class="needs-validation"
                                   novalidate="">
                                 @csrf

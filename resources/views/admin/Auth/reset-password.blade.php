@@ -54,7 +54,11 @@
                                            class="form-control"
                                            name="email" tabindex="1"
                                            required autofocus>
-{{--                                    <input type="hidden" name="token" value="{{@request()->token }}">--}}
+                                    <input id="token" value="{{$token }}" type="hidden"
+                                           class="form-control"
+                                           name="token" tabindex="1"
+                                           required autofocus>
+                                    {{--                                    <input type="hidden" name="token" value="{{@request()->token }}">--}}
                                     @error('email')
                                     <code class="text-danger">{{ $message }}</code>
                                     @enderror
