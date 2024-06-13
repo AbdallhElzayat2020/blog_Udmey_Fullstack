@@ -1,6 +1,7 @@
 <?php
 
     use App\Http\Controllers\Admin\AdminAuthController;
+    use App\Http\Controllers\Admin\AdminProfileController;
     use App\Http\Controllers\Admin\DashboardController;
     use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@
         Route::post('reset-password' , [ AdminAuthController::class , 'handleResetPassword' ])->name('reset-password.send');
 
         //Profile Routes
-//        Route::resource('profile',);
+        Route::resource('profile',AdminProfileController::class);
 
     });
 

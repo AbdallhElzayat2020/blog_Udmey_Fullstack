@@ -20,4 +20,19 @@
         'Forgot your password? No problem. Just let us know your email address and
                                  we will email you a password reset link that will allow you to choose a new one.' => 'نسيت كلمة المرور؟ لا مشكلة. فقط أخبرنا بعنوان بريدك الإلكتروني وسوف نرسل لك رابط إعادة تعيين كلمة المرور الذي سيمكنك من اختيار كلمة مرور جديدة.' ,
         'A mail has been sent to your email address. Please check !' => 'تم إرسال بريد إلى عنوان بريدك الإلكتروني. يرجى التحقق!' ,
+
+
+        //Profile Page
+
+        'Profile' => 'الملف الشخصي' ,
+        'Dashboard' => 'لوحة التحكم' ,
+        'Edit Profile' => 'تعديل الملف الشخصي' ,
+        'First Name' => 'الاسم الأول' ,
+        'Please fill in the First Name field' => 'يرجى ملء حقل الاسم الأول' ,
+        'Save Changes' => 'حفظ التغييرات' ,
+        'Old Password' => 'كلمة المرور القديمة' ,
+        'New Password' => 'كلمة المرور الجديدة' ,
+        'Change Password' => 'تحديث كلمة المرور' ,
+        'Choose File' => 'اختر ملف' ,
+
     ];
