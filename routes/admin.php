@@ -21,6 +21,9 @@
 
         Route::post('reset-password' , [ AdminAuthController::class , 'handleResetPassword' ])->name('reset-password.send');
 
+        //Profile Routes
+//        Route::resource('profile',);
+
     });
 
     //    Protected Routes

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Forgot Password Page</title>
+    <title>Reset Password Page</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{asset('admin/assets/modules/bootstrap/css/bootstrap.min.css')}}">
@@ -41,7 +41,7 @@
                              class="shadow-light rounded-circle">
                     </div>
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Reset Password</h4></div>
+                        <div class="card-header"><h4>{{__('admin.Reset Password')}}</h4></div>
                         <div class="card-body">
                             <form method="POST" action="{{route('admin.reset-password.send')}}"
                                   class="needs-validation"
@@ -49,7 +49,7 @@
                                 @csrf
                                 @method('POST')
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">{{__('admin.Email')}}</label>
                                     <input id="email" value="{{@request()->email }}" type="email"
                                            class="form-control"
                                            name="email" tabindex="1"
@@ -63,11 +63,11 @@
                                     <code class="text-danger">{{ $message }}</code>
                                     @enderror
                                     <div class="invalid-feedback">
-                                        Please fill in your email
+                                        {{__('admin.Please fill in your email')}}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">{{__('admin.Password')}}</label>
                                     <input id="password" value="{{ old('password') }}" type="password"
                                            class="form-control"
                                            name="password" tabindex="1"
@@ -76,25 +76,25 @@
                                     <code class="text-danger">{{ $message }}</code>
                                     @enderror
                                     <div class="invalid-feedback">
-                                        Please fill in your password
+                                        {{__('admin.Please fill in your password')}}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password">Password Confirmation</label>
+                                    <label for="password">{{__('admin.Password Confirmation')}}</label>
                                     <input id="password" value="{{ old('password_confirmation') }}" type="password"
                                            class="form-control"
                                            name="password_confirmation" tabindex="1"
                                            required autofocus>
 
                                     <div class="invalid-feedback">
-                                        Please fill in your password confirmation
+                                        {{__('admin.Please fill in your password confirmation')}}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                        Send Password Reset Link
+                                        {{__('admin.Send Password Reset Link')}}
                                     </button>
                                 </div>
                             </form>

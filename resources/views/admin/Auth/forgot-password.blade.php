@@ -42,12 +42,11 @@
                              class="shadow-light rounded-circle">
                     </div>
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Forgot Password</h4></div>
+                        <div class="card-header"><h4>{{__('admin.Forgot Password')}}</h4></div>
                         <div class="card-body">
                             <p>
-                                Forgot your password? No problem. Just let us know your email address and we will email
-                                you
-                                a password reset link that will allow you to choose a new one.
+                                {{__('admin.Forgot your password? No problem. Just let us know your email address and
+                                 we will email you a password reset link that will allow you to choose a new one.')}}
                             </p>
                             <br>
                             @if(session()->has('success'))
@@ -63,7 +62,7 @@
                                 @csrf
                                 @method('POST')
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">{{__('admin.Email')}}</label>
                                     <input id="email" value="{{ old('email') }}" type="email" class="form-control"
                                            name="email" tabindex="1"
                                            required autofocus>
@@ -71,13 +70,13 @@
                                     <code class="text-danger">{{ $message }}</code>
                                     @enderror
                                     <div class="invalid-feedback">
-                                        Please fill in your email
+                                        {{__('admin.Please fill in your email')}}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                        Send Password Reset Link
+                                        {{__("admin.Send Password Reset Link")}}
                                     </button>
                                 </div>
                             </form>

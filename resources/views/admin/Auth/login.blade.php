@@ -41,7 +41,7 @@
                              class="shadow-light rounded-circle">
                     </div>
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Login</h4></div>
+                        <div class="card-header"><h4>{{__('admin.Login')}}</h4></div>
                         <div class="card-body">
                             @if(session()->has('success'))
                                 <i>
@@ -53,7 +53,7 @@
                                 @csrf
                                 @method('POST')
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">{{__('admin.Email')}}</label>
                                     <input id="email" value="{{ old('email') }}" type="email" class="form-control"
                                            name="email" tabindex="1"
                                            required autofocus>
@@ -61,16 +61,16 @@
                                     <code class="text-danger">{{ $message }}</code>
                                     @enderror
                                     <div class="invalid-feedback">
-                                        Please fill in your email
+                                        {{__('admin.Please fill in your email')}}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="d-block">
-                                        <label for="password" class="control-label">Password</label>
+                                        <label for="password" class="control-label">{{__('admin.Password')}}</label>
                                         <div class="float-right">
                                             <a href="{{route('admin.forgot-password')}}" class="text-small">
-                                                Forgot Password?
+                                                {{__('admin.Forgot Password?')}}
                                             </a>
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                     <code class="text-danger">{{ $message }}</code>
                                     @enderror
                                     <div class="invalid-feedback">
-                                        please fill in your password
+                                        {{__('admin.Please fill in your password')}}
                                     </div>
                                 </div>
 
@@ -89,18 +89,17 @@
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
                                                id="remember-me">
-                                        <label class="custom-control-label" for="remember-me">Remember Me</label>
+                                        <label class="custom-control-label"
+                                               for="remember-me">{{__('admin.Remember Me')}}</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                        Login
+                                        {{__('admin.Login')}}
                                     </button>
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
 
