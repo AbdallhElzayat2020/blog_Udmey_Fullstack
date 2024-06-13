@@ -8,7 +8,7 @@
         'Forgot Password?' => 'Forgot Password?' ,
         'please fill in your password' => 'please fill in your password' ,
         'Remember Me' => 'Remember Me' ,
-<<<<<<< HEAD
+
         //Reset Password Page
         'Reset Password' => 'Reset Password' ,
         'Password Confirmation' => 'Password Confirmation' ,
@@ -20,8 +20,4 @@
         'Forgot your password? No problem. Just let us know your email address and
                                  we will email you a password reset link that will allow you to choose a new one.' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.' ,
         'A mail has been sent to your email address. Please check !'=>'A mail has been sent to your email address. Please check !',
-=======
->>>>>>> origin/master
-
     ];
-?>
