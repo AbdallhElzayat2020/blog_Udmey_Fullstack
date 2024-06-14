@@ -30,6 +30,7 @@
         'Save Changes' => 'Save Changes' ,
         'Old Password' => 'Old Password' ,
         'New Password' => 'New Password' ,
+        'please fill in your New password' => 'please fill in your New password' ,
         'Change Password' => 'Change Password' ,
         'Choose File' => 'Choose File' ,
     ];

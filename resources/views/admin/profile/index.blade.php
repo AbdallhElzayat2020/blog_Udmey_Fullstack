@@ -36,6 +36,7 @@
                                     <div id="image-preview" class="image-preview mb-3 ">
                                         <label for="image-upload" id="image-label">{{__('admin.Choose File')}}</label>
                                         <input type="file" name="image" id="image-upload"/>
+                                        <input type="hidden" name="old_image" value="{{$user->image}}"/>
                                     </div>
                                     @error('image')
                                     <b class="text-danger  ">{{$message}}</b>
@@ -84,7 +85,7 @@
                                 <div class="form-group col-md-12 col-12">
                                     <label>{{__('admin.Old Password')}}</label>
                                     <input type="password" placeholder="{{__('admin.Old Password')}}"
-                                           name="old_password"
+                                           name="current_password"
                                            class="form-control"
                                            value=""
                                            required="">
@@ -96,11 +97,11 @@
                                 <div class="form-group col-md-12 col-12">
                                     <label>{{__('admin.New Password')}}</label>
                                     <input type="password" class="form-control"
-                                           name="new_password" placeholder="{{__('admin.Password')}}"
+                                           name="password" placeholder="{{__('admin.Password')}}"
                                            value=""
                                            required="">
                                     <div class="invalid-feedback">
-                                        {{__('admin.please fill in your password')}}
+                                        {{__('admin.please fill in your New password')}}
                                     </div>
                                 </div>
 
@@ -132,6 +133,15 @@
     </section>
 
 @endsection
-
 @section('js')
+    <script>
+        $(document).ready(function () {
+            $('.image-preview').css({
+                "background-image": "url({{asset($user->image)}}",
+                "background-size": "cover",
+                "background-position": "center",
+            });
+        });
+    </script>
 @endsection
+

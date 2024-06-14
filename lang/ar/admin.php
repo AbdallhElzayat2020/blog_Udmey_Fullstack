@@ -33,6 +33,7 @@
         'Old Password' => 'كلمة المرور القديمة' ,
         'New Password' => 'كلمة المرور الجديدة' ,
         'Change Password' => 'تحديث كلمة المرور' ,
+        'Please fill in your New password' => 'يرجى ملء كلمة المرور الجديدة' ,
         'Choose File' => 'اختر ملف' ,
 
     ];

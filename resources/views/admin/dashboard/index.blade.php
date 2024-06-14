@@ -3,8 +3,7 @@
 @section('title')
     Home Page
 @endsection
-@section('css')
-@endsection
+
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -77,5 +76,4 @@
 
 @endsection
 
-@section('scripts')
-@endsection
+

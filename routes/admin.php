@@ -22,8 +22,6 @@
 
         Route::post('reset-password' , [ AdminAuthController::class , 'handleResetPassword' ])->name('reset-password.send');
 
-        //Profile Routes
-        Route::resource('profile',AdminProfileController::class);
 
     });
 
@@ -31,6 +29,11 @@
     Route::group([ 'prefix' => 'admin' , 'as' => 'admin.' , 'middleware' => [ 'admin' ] ] , function () {
 
         Route::get('dashboard' , [ DashboardController::class , 'index' ])->name('dashboard');
+
+        //Profile Routes
+        Route::resource('profile' , AdminProfileController::class);
+        Route::put('profile-password' , [ AdminProfileController::class , 'passwordUpdate' ])->name('profile-password.update');
+
 
     });
 
