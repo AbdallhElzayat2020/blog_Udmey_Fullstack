@@ -33,4 +33,22 @@
         'please fill in your New password' => 'please fill in your New password' ,
         'Change Password' => 'Change Password' ,
         'Choose File' => 'Choose File' ,
+
+
+        'Hi' => 'Hi' ,
+        'Settings' => 'Settings' ,
+        'Logout' => 'Logout' ,
+
+
+        'Update Profile' => 'Update Profile' ,
+        'Your Profile as been Updated successfully' => 'Your Profile as been Updated successfully' ,
+        'Update Password' => 'Update Password' ,
+        'Your Password as been Updated successfully' => 'Your Password as been Updated successfully' ,
+        'You have  been login successfully!' => 'You have  been login successfully!' ,
+        'Your Link has been sent successfully!' => 'Your Link has been sent successfully!' ,
+        'Your password as been changed successfully!' => 'Your password as been changed successfully!' ,
+
+
+
+
     ];

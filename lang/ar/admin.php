@@ -35,5 +35,16 @@
         'Change Password' => 'تحديث كلمة المرور' ,
         'Please fill in your New password' => 'يرجى ملء كلمة المرور الجديدة' ,
         'Choose File' => 'اختر ملف' ,
+        'Settings' => 'الإعدادات' ,
+        'Hi' => 'اهلا بك ' ,
+        'Logout' => 'تسجيل الخروج' ,
 
+
+        'Update Profile' => 'تحديث الملف الشخصي' ,
+        'Your Profile has been updated successfully' => 'تم تحديث ملفك الشخصي بنجاح' ,
+        'Update Password' => 'تحديث كلمة المرور' ,
+        'Your Password has been updated successfully' => 'تم تحديث كلمة مرورك بنجاح' ,
+        'You have been logged in successfully!' => 'تم تسجيل دخولك بنجاح!' ,
+        'Your link has been sent successfully!' => 'تم إرسال الرابط بنجاح!' ,
+        'Your password has been changed successfully!' => 'تم تغيير كلمة مرورك بنجاح!' ,
     ];

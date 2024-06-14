@@ -86,11 +86,7 @@
                                 <h4>{{__('admin.Change Password')}}</h4>
                             </div>
                             <div class="card-body">
-                                @if(session()->has('success'))
-                                    <i>
-                                        <b style="color: green">{{ session()->get('success') }}</b>
-                                    </i>
-                                @endif
+
                                 <div class="form-group col-md-12 col-12">
                                     <label>{{__('admin.Old Password')}}</label>
                                     <input type="password" placeholder="{{__('admin.Old Password')}}"

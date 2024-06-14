@@ -15,6 +15,8 @@
         @include('admin.layouts.main-footer')
     </div>
 </div>
+@include('sweetalert::alert')
+
 @include('admin.layouts.scripts')
 </body>
 </html>
