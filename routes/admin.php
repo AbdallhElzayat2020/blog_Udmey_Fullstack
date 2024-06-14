@@ -31,8 +31,9 @@
         Route::get('dashboard' , [ DashboardController::class , 'index' ])->name('dashboard');
 
         //Profile Routes
+        Route::put('profile-password/{id}' , [ AdminProfileController::class , 'passwordUpdate' ])->name('profile-password.update');
+
         Route::resource('profile' , AdminProfileController::class);
-        Route::put('profile-password' , [ AdminProfileController::class , 'passwordUpdate' ])->name('profile-password.update');
 
 
     });

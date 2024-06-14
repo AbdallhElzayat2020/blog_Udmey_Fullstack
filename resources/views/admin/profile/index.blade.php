@@ -76,19 +76,30 @@
 
                 <div class="col-12 col-md-12 col-lg-6">
                     <div class="card">
-                        <form method="post" class="needs-validation" novalidate="">
+
+                        <form method="post" action="{{route('admin.profile-password.update',$user->id)}}"
+                              class="needs-validation"
+                              novalidate="">
+                            @csrf
+                            @method('PUT')
                             <div class="card-header">
                                 <h4>{{__('admin.Change Password')}}</h4>
                             </div>
                             <div class="card-body">
-
+                                @if(session()->has('success'))
+                                    <i>
+                                        <b style="color: green">{{ session()->get('success') }}</b>
+                                    </i>
+                                @endif
                                 <div class="form-group col-md-12 col-12">
                                     <label>{{__('admin.Old Password')}}</label>
                                     <input type="password" placeholder="{{__('admin.Old Password')}}"
                                            name="current_password"
                                            class="form-control"
-                                           value=""
                                            required="">
+                                    @error('current_password')
+                                    <b class="text-danger  ">{{$message}}</b>
+                                    @enderror
                                     <div class="invalid-feedback">
                                         {{__('admin.please fill in your password')}}
                                     </div>
@@ -98,8 +109,10 @@
                                     <label>{{__('admin.New Password')}}</label>
                                     <input type="password" class="form-control"
                                            name="password" placeholder="{{__('admin.Password')}}"
-                                           value=""
                                            required="">
+                                    @error('password')
+                                    <b class="text-danger  ">{{$message}}</b>
+                                    @enderror
                                     <div class="invalid-feedback">
                                         {{__('admin.please fill in your New password')}}
                                     </div>
@@ -110,8 +123,10 @@
                                     <input type="password" class="form-control"
                                            name="password_confirmation"
                                            placeholder="{{__('admin.Password Confirmation')}}"
-                                           value=""
                                            required="">
+                                    @error('password_confirmation')
+                                    <b class="text-danger">{{$message}}</b>
+                                    @enderror
                                     <div class="invalid-feedback">
                                         {{__('admin.Please fill in your password confirmation')}}
                                     </div>
