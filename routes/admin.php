@@ -3,6 +3,7 @@
     use App\Http\Controllers\Admin\AdminAuthController;
     use App\Http\Controllers\Admin\AdminProfileController;
     use App\Http\Controllers\Admin\DashboardController;
+    use App\Http\Controllers\Admin\LanguageController;
     use Illuminate\Support\Facades\Route;
 
     //    Public Routes
@@ -22,7 +23,6 @@
 
         Route::post('reset-password' , [ AdminAuthController::class , 'handleResetPassword' ])->name('reset-password.send');
 
-
     });
 
     //    Protected Routes
@@ -34,7 +34,8 @@
         Route::put('profile-password/{id}' , [ AdminProfileController::class , 'passwordUpdate' ])->name('profile-password.update');
 
         Route::resource('profile' , AdminProfileController::class);
-
+        //Language Routes
+        Route::resource('language' , LanguageController::class);
 
     });
 

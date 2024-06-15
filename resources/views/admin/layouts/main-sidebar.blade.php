@@ -11,17 +11,16 @@
             <li class="dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
-                    <li class=active><a class="nav-link" href="">General Dashboard</a></li>
+                    <li class=''><a class="nav-link" href="">General Dashboard</a></li>
                     <li><a class="nav-link" href="">Ecommerce Dashboard</a></li>
                 </ul>
             </li>
             <li class="menu-header">Starter</li>
             <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-fire"></i> <span>  Languages</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="">Default Layout</a></li>
-                    <li><a class="nav-link" href="">Transparent Sidebar</a></li>
-                    <li><a class="nav-link" href="">Top Navigation</a></li>
+                    <li><a class="nav-link" href="{{route('admin.language.index')}}">Languages</a></li>
+
                 </ul>
             </li>
         </ul>
