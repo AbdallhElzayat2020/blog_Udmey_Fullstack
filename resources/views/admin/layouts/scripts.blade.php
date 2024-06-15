@@ -9,11 +9,19 @@
 @yield('js')
 <!-- JS Libraies -->
 <script src="{{asset('admin/assets/modules/summernote/summernote-bs4.js')}}"></script>
+{{--secrch table--}}
+<script src="{{asset('admin/assets/modules/select2/dist/js/select2.full.min.js')}}"></script><!-- Template JS File -->
 
-<!-- Template JS File -->
 <script src="{{asset('admin/assets/js/scripts.js')}}"></script>
 <script src="{{asset('admin/assets/js/custom.js')}}"></script>
 <script src="{{asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js')}}"></script>
+{{--data Table--}}
+<script src="{{asset('admin/assets/modules/datatables/datatables.min.js')}}"></script>
+<script src="{{asset('admin/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('admin/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js')}}"></script>
+{{--<script src="{{asset('admin/https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>--}}
+<script src="{{asset('admin/assets/modules/jquery-ui/jquery-ui.min.js')}}"></script>
+
 <script>
     $.uploadPreview({
         input_field: "#image-upload",   // Default: .image-upload
@@ -24,4 +32,7 @@
         no_label: false,                // Default: false
         success_callback: null          // Default: null
     });
+</script>
+<script>
+
 </script>

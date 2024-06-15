@@ -1,4 +1,4 @@
-@extends('admin.layouts.master');
+@extends('admin.layouts.master')
 @section('title')
     Language Page
 @endsection
@@ -19,9 +19,75 @@
                 </div>
             </div>
             <div class="card-body">
-                <p>Write something here</p>
+
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">
+                                ID
+                            </th>
+                            <th>Language Name</th>
+                            <th>Language Code</th>
+                            <th>Default</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($languages as $language)
+
+                        @endforeach
+                        <tr>
+
+                            <td>
+                                {{$language->id}}
+                            </td>
+                            <td>
+                                {{$language->name}}
+                            </td>
+                            <td>
+
+                                {{$language->lang}}
+                            </td>
+                            <td>
+                                @if($language->default == 1)
+                                    <span class="badge badge-primary">Default</span>
+                                @else
+                                    <span class="badge badge-warning">No</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($language->status == 1)
+                                    <span class="badge badge-success">Active</span>
+                                @else
+                                    <span class="badge badge-danger">Not Active</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="">update</a>
+                                <a class="btn btn-danger" href="">delete</a>
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </section>
 
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $("#table-1").DataTable({
+                "columnDefs": [
+                    {"sortable": false, "targets": [2, 3]}
+                ]
+            });
+        });
+    </script>
 @endsection
