@@ -35,46 +35,47 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($languages as $language)
 
+                        @foreach($languages as $key=> $language)
+
+                            <tr>
+
+                                <td>
+                                    {{$key + 1}}
+                                </td>
+                                <td>
+                                    {{$language->name}}
+                                </td>
+                                <td>
+                                    {{$language->lang}}
+                                </td>
+                                <td>
+                                    @if($language->default == 1)
+                                        <span class="badge badge-success">Default</span>
+                                    @else
+                                        <span class="badge badge-warning">No</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($language->status == 1)
+                                        <span class="badge badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">Not Active</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{route('admin.language.edit',$language->id)}}"> <i
+                                            class="fas fa-edit" style="font-size:15px"></i></a>
+                                    <a class="btn btn-danger"
+                                       href="{{route('admin.language.destroy',$language->id)}}"><i
+                                            class="fas fa-trash" style="font-size:15px"></i>
+                                    </a>
+                                </td>
+                            </tr>
                         @endforeach
-                        <tr>
-
-                            <td>
-                                {{$language->id}}
-                            </td>
-                            <td>
-                                {{$language->name}}
-                            </td>
-                            <td>
-
-                                {{$language->lang}}
-                            </td>
-                            <td>
-                                @if($language->default == 1)
-                                    <span class="badge badge-primary">Default</span>
-                                @else
-                                    <span class="badge badge-warning">No</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if($language->status == 1)
-                                    <span class="badge badge-success">Active</span>
-                                @else
-                                    <span class="badge badge-danger">Not Active</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a class="btn btn-primary" href="">update</a>
-                                <a class="btn btn-danger" href="">delete</a>
-                            </td>
-
-                        </tr>
-
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </section>
