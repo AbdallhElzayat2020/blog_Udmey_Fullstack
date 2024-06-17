@@ -21,6 +21,8 @@
 <script src="{{asset('admin/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js')}}"></script>
 {{--<script src="{{asset('admin/https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>--}}
 <script src="{{asset('admin/assets/modules/jquery-ui/jquery-ui.min.js')}}"></script>
+{{--sweet Alert--}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $.uploadPreview({
@@ -32,7 +34,47 @@
         no_label: false,                // Default: false
         success_callback: null          // Default: null
     });
-</script>
-<script>
+    // add csrf token in ajax request
+    $.ajaxSetup({
+        headers: {
+            'X_CSRF_TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    // delete popup
+    $(document).ready(function () {
+        $('.delete-item').on('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = $(this).attr("href");
+                    console.log(url);
+                    $.ajax({
+                        method: "DELETE",
+                        url: url,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (data) {
+                            console.log(data)
+                        }
+                    });
 
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+        });
+    })
 </script>
+

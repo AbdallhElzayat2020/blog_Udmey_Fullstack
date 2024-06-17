@@ -66,7 +66,7 @@
                                 <td>
                                     <a class="btn btn-primary" href="{{route('admin.language.edit',$language->id)}}"> <i
                                             class="fas fa-edit" style="font-size:15px"></i></a>
-                                    <a class="btn btn-danger"
+                                    <a class="btn btn-danger delete-item"
                                        href="{{route('admin.language.destroy',$language->id)}}"><i
                                             class="fas fa-trash" style="font-size:15px"></i>
                                     </a>
