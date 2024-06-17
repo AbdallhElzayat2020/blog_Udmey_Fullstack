@@ -6,8 +6,9 @@
     use App\Http\Controllers\Admin\LanguageController;
     use Illuminate\Support\Facades\Route;
 
-    //    Public Routes
+        //Public Routes
     Route::group([ 'prefix' => 'admin' , 'as' => 'admin.' ] , function () {
+        //Auth Routes
         Route::get('login' , [ AdminAuthController::class , 'login' ])->name('login');
 
         Route::post('login' , [ AdminAuthController::class , 'handleLogin' ])->name('handle-login');
@@ -25,7 +26,7 @@
 
     });
 
-    //    Protected Routes
+        //Protected Routes
     Route::group([ 'prefix' => 'admin' , 'as' => 'admin.' , 'middleware' => [ 'admin' ] ] , function () {
 
         Route::get('dashboard' , [ DashboardController::class , 'index' ])->name('dashboard');

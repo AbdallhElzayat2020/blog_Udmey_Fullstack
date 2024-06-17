@@ -46,7 +46,7 @@
             e.preventDefault();
             Swal.fire({
                 title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                text: "You won't be able to Delete this!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -60,18 +60,27 @@
                         method: "DELETE",
                         url: url,
                         success: function (data) {
-                            console.log(data);
+                            if (data.status === 'success') {
+                                Swal.fire(
+                                    'Deleted!',
+                                    data.message,
+                                    'success',
+                                );
+                                window.location.reload();
+                            } else if (data.status === 'error') {
+                                Swal.fire(
+                                    'Error!',
+                                    data.message,
+                                    'error',
+                                );
+                            }
                         },
-                        error: function (data) {
-                            console.log(data)
+                        error: function (xhr, status, error) {
+                            console.error(error);
                         }
                     });
 
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
+
                 }
             });
         });
