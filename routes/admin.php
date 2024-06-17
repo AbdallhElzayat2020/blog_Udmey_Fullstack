@@ -31,11 +31,11 @@
 
         Route::get('dashboard' , [ DashboardController::class , 'index' ])->name('dashboard');
 
-        //Profile Routes
+        //Profile Route
         Route::put('profile-password/{id}' , [ AdminProfileController::class , 'passwordUpdate' ])->name('profile-password.update');
 
         Route::resource('profile' , AdminProfileController::class);
-        //Language Routes
+        //Language Route
         Route::resource('language' , LanguageController::class);
 
     });

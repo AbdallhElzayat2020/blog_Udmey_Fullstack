@@ -8,16 +8,17 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+            <li class="active">
+                <a href="{{route('admin.dashboard')}}" class="nav-link "><i class="fas
+                fa-fire"></i><span>Dashboard</span></a>
             </li>
             <li class="menu-header">Starter</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-fire"></i> <span>  Languages</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{route('admin.language.index')}}">Languages</a></li>
-
-                </ul>
+            <li class="">
+                <a class="nav-link " href=""><i class="fas fa-fire"></i>
+                    <span>Categories</span></a>
+            </li>
+            <li class="">
+                <a class="nav-link " href="{{route('admin.language.index')}}"><i class="fas fa-fire"></i> <span>Languages</span></a>
             </li>
         </ul>
 
