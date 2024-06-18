@@ -8,7 +8,7 @@
     use App\Http\Controllers\Admin\NewsController;
     use Illuminate\Support\Facades\Route;
 
-        //Public Routes
+    //Public Routes
     Route::group([ 'prefix' => 'admin' , 'as' => 'admin.' ] , function () {
         //Auth Routes
         Route::get('login' , [ AdminAuthController::class , 'login' ])->name('login');
@@ -28,7 +28,7 @@
 
     });
 
-        //Protected Routes
+    //Protected Routes
     Route::group([ 'prefix' => 'admin' , 'as' => 'admin.' , 'middleware' => [ 'admin' ] ] , function () {
 
         Route::get('dashboard' , [ DashboardController::class , 'index' ])->name('dashboard');
@@ -42,6 +42,8 @@
         //Category Route
         Route::resource('category' , CategoryController::class);//Category Route
         //News Route
+        Route::get('fetch-new-category' , [ NewsController::class , 'fetchCategory' ])->name('fetch-new-category');
+
         Route::resource('news' , NewsController::class);
 
     });

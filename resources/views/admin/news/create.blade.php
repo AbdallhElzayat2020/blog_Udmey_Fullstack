@@ -126,9 +126,7 @@
                             </div>
                         </div>
 
-
                     </div>
-
 
                     <button class="btn btn-primary" type="submit">Create</button>
                 </form>
@@ -138,15 +136,14 @@
 
 @endsection
 
-{{--@section('js')--}}
-{{--    <script>--}}
-{{--        $(document).ready(function () {--}}
-{{--            $('#language-select').on('change', function () {--}}
-{{--                let value = $(this).val();--}}
-{{--                let name = $(this).children(':selected').text();--}}
-{{--                $('#slug').val(value);--}}
-{{--                $('#name').val(name);--}}
-{{--            })--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--@endsection--}}
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('#language-select').on('change', function () {
+                $.ajax({
+
+                })
+            })
+        });
+    </script>
+@endsection

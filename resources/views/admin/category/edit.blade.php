@@ -12,7 +12,6 @@
         <div class="card card-primary">
             <div class="card-header">
                 <h4>Update Category</h4>
-
             </div>
             <div class="card-body">
                 <form action="{{route('admin.category.update', $category->id)}}" method="POST">
@@ -61,7 +60,6 @@
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
-
                     <button class="btn btn-primary" type="submit">Update</button>
                 </form>
             </div>
