@@ -40,7 +40,7 @@
             'X_CSRF_TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    // delete popup
+    // delete popup   should add this class delete-item in btn
     $(document).ready(function () {
         $('.delete-item').on('click', function (e) {
             e.preventDefault();

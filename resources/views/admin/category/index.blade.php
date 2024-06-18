@@ -32,9 +32,10 @@
                 <div class="tab-content tab-bordered" id="myTab3Content">
                     @foreach($languages as $language)
                         @php
-                            $categories=\App\Models\Category::where('language',$language->lang)->get();
+                            $categories=\App\Models\Category::where('language',$language->lang)->orderByDesc('id')->get();
                         @endphp
-                        <div class="tab-pane fade show {{$loop->index===0?'active':''}}" id="home-{{$language->lang}}"
+                        <div class="tab-pane fade show {{$loop->index === 0 ? 'active' : ''}}"
+                             id="home-{{$language->lang}}"
                              role="tabpanel"
                              aria-labelledby="home-tab2">
                             <div class="card-body">
@@ -59,17 +60,17 @@
                                                 <td>{{$category->name}}</td>
                                                 <td>{{$category->language}}</td>
                                                 <td>
-                                                    @if($category->show_at_nav==1)
+                                                    @if($category->show_at_navbar ===1)
                                                         <span class="badge badge-success ">Yes</span>
                                                     @else
-                                                        <span class="badge badge-warning ">No</span>
+                                                        <span class="badge badge-danger ">No</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($category->status==1)
+                                                    @if($category->status === 1)
                                                         <span class="badge badge-success ">Yes</span>
                                                     @else
-                                                        <span class="badge badge-warning ">No</span>
+                                                        <span class="badge badge-danger ">No</span>
                                                     @endif
                                                 </td>
                                                 <td>

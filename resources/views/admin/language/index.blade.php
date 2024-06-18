@@ -53,7 +53,7 @@
                                     @if($language->default == 1)
                                         <span class="badge badge-success">Default</span>
                                     @else
-                                        <span class="badge badge-warning">No</span>
+                                        <span class="badge badge-danger">No</span>
                                     @endif
                                 </td>
                                 <td>
