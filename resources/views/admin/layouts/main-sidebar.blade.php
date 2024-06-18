@@ -14,7 +14,7 @@
             </li>
             <li class="menu-header">Starter</li>
             <li class="">
-                <a class="nav-link " href=""><i class="fas fa-fire"></i>
+                <a class="nav-link " href="{{route('admin.category.index')}}"><i class="fas fa-fire"></i>
                     <span>Categories</span></a>
             </li>
             <li class="">
