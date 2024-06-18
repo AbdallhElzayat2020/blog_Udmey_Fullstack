@@ -24,6 +24,9 @@
 {{--sweet Alert--}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+{{--code editor--}}
+<script src="{{asset('admin/assets/modules/summernote/summernote-bs4.js')}}"></script>
+
 <script>
     $.uploadPreview({
         input_field: "#image-upload",   // Default: .image-upload

@@ -5,6 +5,7 @@
     use App\Http\Controllers\Admin\CategoryController;
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\LanguageController;
+    use App\Http\Controllers\Admin\NewsController;
     use Illuminate\Support\Facades\Route;
 
         //Public Routes
@@ -39,7 +40,9 @@
         //Language Route
         Route::resource('language' , LanguageController::class);
         //Category Route
-        Route::resource('category' , CategoryController::class);
+        Route::resource('category' , CategoryController::class);//Category Route
+        //News Route
+        Route::resource('news' , NewsController::class);
 
     });
 

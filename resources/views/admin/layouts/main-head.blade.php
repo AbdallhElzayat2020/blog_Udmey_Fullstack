@@ -19,7 +19,8 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/css/components.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('admin/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
 
     <!-- Start GA -->
     <!-- data table -->
@@ -29,6 +30,9 @@
           href="{{assert('admin/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet"
           href="{{asset('admin/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css')}}">
+    {{--code editor--}}
+    <link rel="stylesheet" href="{{asset('admin/assets/modules/summernote/summernote-bs4.css')}}">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
