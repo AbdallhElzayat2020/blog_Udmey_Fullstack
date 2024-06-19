@@ -15,7 +15,7 @@
 
             </div>
             <div class="card-body">
-                <form action="{{route('admin.category.store')}}" method="post">
+                <form enctype="multipart/form-data" action="{{route('admin.category.store')}}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="language-select">Language Name</label>
@@ -32,7 +32,7 @@
 
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <select name="category" id="category" class="form-control">
+                        <select name="category" id="category" class="form-control select2">
                             <option>--Select--</option>
                             <option value=""></option>
                         </select>
@@ -68,7 +68,6 @@
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
-
 
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
@@ -140,8 +139,22 @@
     <script>
         $(document).ready(function () {
             $('#language-select').on('change', function () {
+                let lang = $(this).val();
                 $.ajax({
+                    method: 'GET',
+                    url: '{{route('admin.fetch-new-category')}}',
+                    data: {lang: lang},
+                    success: function (data) {
+                        $('#category').html("");
+                        $('#category').html(`<option value=''>---Choose Category---</option>`);
 
+                        $.each(data, function (index, data) {
+                            $('#category').append(`<option value="${data.id}">${data.name}</option>`);
+                        })
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
                 })
             })
         });

@@ -5,6 +5,7 @@
 @section('content')
 
     <section class="section">
+
         <div class="section-header">
             <h1>Update Category Page</h1>
         </div>

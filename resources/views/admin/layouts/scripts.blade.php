@@ -83,8 +83,6 @@
                             console.error(error);
                         }
                     });
-
-
                 }
             });
         });
