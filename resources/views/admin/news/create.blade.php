@@ -2,6 +2,8 @@
 @section('title')
     Create News Page
 @endsection
+
+
 @section('content')
 
     <section class="section">
@@ -15,7 +17,7 @@
 
             </div>
             <div class="card-body">
-                <form enctype="multipart/form-data" action="{{route('admin.category.store')}}" method="post">
+                <form enctype="multipart/form-data" action="{{route('admin.news.store')}}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="language-select">Language Name</label>
@@ -34,17 +36,8 @@
                         <label for="category">Category</label>
                         <select name="category" id="category" class="form-control select2">
                             <option>--Select--</option>
-                            <option value=""></option>
                         </select>
-                        @error('status')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input name="title" id="title" type="text" class="form-control">
-                        @error('title')
+                        @error('category')
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
@@ -60,11 +53,28 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input name="title" id="title" type="text" class="form-control">
+                        @error('title')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+
 
                     <div class="form-group">
                         <label for="content">Content</label>
                         <textarea name="content" id="content" class="summernote"></textarea>
                         @error('content')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tags" class="d-block">Tags</label>
+                        <input id="tags" name="tags" type="text" class="form-control inputtags
+                       ">
+                        @error('tags')
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
@@ -85,12 +95,13 @@
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
+
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <div class="control-label">Status</div>
                                 <label for="status" class="custom-switch mt-2">
-                                    <input type="checkbox" id="status" name="is_breaking_news"
+                                    <input type="checkbox" value="1" id="status" name="status"
                                            class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
@@ -101,7 +112,8 @@
                             <div class="form-group">
                                 <div class="control-label">Is Breaking News</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" name="is_breaking_news" class="custom-switch-input">
+                                    <input type="checkbox" value="1" name="is_breaking_news"
+                                           class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
                             </div>
@@ -110,7 +122,7 @@
                             <div class="form-group">
                                 <div class="control-label">Show At Slider</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" name="show_at_slider" class="custom-switch-input">
+                                    <input type="checkbox" value="1" name="show_at_slider" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
                             </div>
@@ -119,7 +131,7 @@
                             <div class="form-group">
                                 <div class="control-label">Show At Popular</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" name="show_at_popular" class="custom-switch-input">
+                                    <input type="checkbox" value="1" name="show_at_popular" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
                             </div>
@@ -137,6 +149,7 @@
 
 @section('js')
     <script>
+
         $(document).ready(function () {
             $('#language-select').on('change', function () {
                 let lang = $(this).val();
@@ -158,5 +171,7 @@
                 })
             })
         });
+
+
     </script>
 @endsection

@@ -26,8 +26,11 @@
 
 {{--code editor--}}
 <script src="{{asset('admin/assets/modules/summernote/summernote-bs4.js')}}"></script>
+{{--Tag Plugin--}}
+<script src="{{asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
 
 <script>
+    {{--upload img Profile--}}
     $.uploadPreview({
         input_field: "#image-upload",   // Default: .image-upload
         preview_box: "#image-preview",  // Default: .image-preview
@@ -37,13 +40,16 @@
         no_label: false,                // Default: false
         success_callback: null          // Default: null
     });
+    {{--    Input Tags--}}
+    $(".inputtags").tagsinput('items');
+
+
     // add csrf token in ajax request
     $.ajaxSetup({
         headers: {
             'X_CSRF_TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
     // delete popup   should add this class delete-item in btn
     $(document).ready(function () {
         $('.delete-item').on('click', function (e) {
