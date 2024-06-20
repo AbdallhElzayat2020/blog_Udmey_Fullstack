@@ -2,15 +2,27 @@
 
     namespace App\Http\Controllers\Admin;
 
-    use App\Http\Controllers\Controller;
-    use App\Http\Requests\Admin\AdminNewsCreateRequest;
     use App\Models\Category;
     use App\Models\Language;
     use App\Models\News;
+    use App\Models\Newsller;
+    use App\Models\Categoryuest;
+    use App\Models\Languagegory;
     use Illuminate\Http\Request;
+    use App\traits\FileUploadTrait;
+    use Illuminate\Http\Requestuage;
+
+    use App\Http\Controllers\Controller;
+    use App\Http\Controllers\ControllerNews;
+    use App\Http\Requests\Admin\AdminNewsCreateRequest;
+    use App\Http\Requests\Admin\AdminNewsCreateRequestuest;
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Str;
 
     class NewsController extends Controller
     {
+        use FileUploadTrait;
+
         /**
          * Display a listing of the resource.
          */
@@ -43,16 +55,30 @@
          */
         public function store( AdminNewsCreateRequest $request )
         {
-//            $news=News::create([
-//
-//            ]);
-            dd($request->all());
+            $imgPath = $this->handleFileUpload($request , 'image');
+            $news = new News();
+            $news->language = $request->language;
+            $news->category_id = $request->category;
+            $news->author_id = Auth::guard('admin')->user()->id;
+            $news->image = $imgPath;
+            $news->title = $request->title;
+            $news->slug = Str::slug($request->input('title'));
+            $news->content = $request->input('content');
+            $news->meta_title = $request->meta_title;
+            $news->meta_description = $request->meta_description;
+            $news->is_breaking_news = $request->is_breaking_news == 1 ? 1 : 0;
+            $news->show_at_slider = $request->show_at_slider == 1 ? 1 : 0;
+            $news->show_at_popular = $request->show_at_popular == 1 ? 1 : 0;
+            $news->status = $request->status == 1 ? 1 : 0;
+            $news->save();
+            toast(__('Category have been Created successfully') , 'success');
+            return redirect()->route('admin.news.index');
         }
 
         /**
          * Display the specified resource.
          */
-        public function show( News $news )
+        public function show()
         {
             //
         }
@@ -60,7 +86,7 @@
         /**
          * Show the form for editing the specified resource.
          */
-        public function edit( News $news )
+        public function edit()
         {
             //
         }
@@ -68,7 +94,7 @@
         /**
          * Update the specified resource in storage.
          */
-        public function update( Request $request , News $news )
+        public function update( Request $request )
         {
             //
         }
@@ -76,7 +102,7 @@
         /**
          * Remove the specified resource from storage.
          */
-        public function destroy( News $news )
+        public function destroy()
         {
             //
         }

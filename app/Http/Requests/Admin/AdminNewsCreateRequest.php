@@ -23,10 +23,17 @@
         {
             return [
                 'language' => [ 'required' ] ,
-                'language' => [ 'required' ] ,
-                'title' => [ 'required' , 'max:255' , 'unique:news,title' ] ,
                 'category' => [ 'required' ] ,
-                'description' => [ 'required' ] ,
-                'image' => [ 'required' ] ];
+                'image' => [ 'required' , 'max:5000' , 'image' ] ,
+                'title' => [ 'required' , 'max:255' , 'unique:news,title' ] ,
+                'content' => [ 'required' ] ,
+                'meta_title' => [ 'max:255' ] ,
+                'meta_description' => [ 'max:255' ] ,
+                'tags' => [ 'required' ] ,
+                'is_breaking_news' => [ 'boolean' ] ,
+                'show_at_slider' => [ 'boolean' ] ,
+                'show_at_popular' => [ 'boolean' ] ,
+                'status' => [ 'boolean' ] ,
+            ];
         }
     }
