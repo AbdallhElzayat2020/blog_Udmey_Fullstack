@@ -5,17 +5,12 @@
     use App\Models\Category;
     use App\Models\Language;
     use App\Models\News;
-    use App\Models\Newsller;
-    use App\Models\Categoryuest;
-    use App\Models\Languagegory;
+    use App\Models\Tag;
     use Illuminate\Http\Request;
     use App\traits\FileUploadTrait;
-    use Illuminate\Http\Requestuage;
 
     use App\Http\Controllers\Controller;
-    use App\Http\Controllers\ControllerNews;
     use App\Http\Requests\Admin\AdminNewsCreateRequest;
-    use App\Http\Requests\Admin\AdminNewsCreateRequestuest;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Str;
 
@@ -28,6 +23,8 @@
          */
         public function index()
         {
+//            $data = News::find(3);
+//            dd($data->tags);
             $languages = Language::all();
             return view('admin.news.index' , compact('languages'));
         }
@@ -71,6 +68,21 @@
             $news->show_at_popular = $request->show_at_popular == 1 ? 1 : 0;
             $news->status = $request->status == 1 ? 1 : 0;
             $news->save();
+
+            //explode to ignore the comma and make an array
+            $tags = explode(',' , $request->tags);
+            $tagIds = [];
+
+            foreach ($tags as $tag) {
+                $item = new Tag();
+                $item->name = $tag;
+                $item->save();
+                $tagIds[] = $item->id;
+            }
+
+            $news->tags()->attach($tagIds);
+
+
             toast(__('Category have been Created successfully') , 'success');
             return redirect()->route('admin.news.index');
         }
