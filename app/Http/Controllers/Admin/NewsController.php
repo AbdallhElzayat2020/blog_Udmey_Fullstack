@@ -23,8 +23,7 @@
          */
         public function index()
         {
-//            $data = News::find(3);
-//            dd($data->tags);
+
             $languages = Language::all();
             return view('admin.news.index' , compact('languages'));
         }
@@ -108,9 +107,14 @@
         /**
          * Show the form for editing the specified resource.
          */
-        public function edit()
+
+        public function edit( $id )
         {
-            //
+            $languages = Language::all();
+
+            $news = News::findOrFail($id);
+
+            return view('admin.news.edit' , compact('languages' , 'news'));
         }
 
         /**
@@ -118,7 +122,7 @@
          */
         public function update( Request $request )
         {
-            //
+
         }
 
         /**
@@ -126,6 +130,6 @@
          */
         public function destroy()
         {
-            //
+
         }
     }

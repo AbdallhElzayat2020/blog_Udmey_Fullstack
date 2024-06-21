@@ -111,7 +111,7 @@
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-primary"
-                                                       href="{{route('admin.category.edit',$item->id)}}">
+                                                       href="{{route('admin.news.edit',$item->id)}}">
                                                         <i class="fas fa-edit" style="font-size:15px"></i></a>
                                                     <a class="btn btn-danger delete-item"
                                                        href="{{route('admin.category.destroy',$item->id)}}">
