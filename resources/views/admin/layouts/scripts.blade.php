@@ -50,8 +50,23 @@
             'X_CSRF_TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    // Toast Notification popup
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+
     // delete popup   should add this class delete-item in btn
     $(document).ready(function () {
+
         $('.delete-item').on('click', function (e) {
             e.preventDefault();
             Swal.fire({

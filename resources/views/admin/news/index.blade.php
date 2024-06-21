@@ -45,9 +45,7 @@
                                     <table class="table table-striped" id="table-{{$language->lang}}">
                                         <thead>
                                         <tr>
-                                            <th class="text-center">
-                                                #
-                                            </th>
+                                            <th class="text-center">#</th>
                                             <th>Image</th>
                                             <th>Title</th>
                                             <th>Category</th>
@@ -71,18 +69,21 @@
                                                     <label class="custom-switch mt-2">
                                                         <input {{$item->is_breaking_news === 1 ? 'checked' : ''}}
                                                                type="checkbox" value="1"
+                                                               data-id="{{$item->id}}"
+                                                               data-name="is_breaking_news"
                                                                name="is_breaking_news"
-                                                               class="custom-switch-input">
+                                                               class="custom-switch-input toggle-status">
                                                         <span class="custom-switch-indicator"></span>
                                                     </label>
                                                 </td>
-
                                                 <td>
                                                     <label class="custom-switch mt-2">
                                                         <input {{$item->show_at_slider === 1 ? 'checked' : ''}}
                                                                type="checkbox" value="1"
-                                                               name="is_breaking_news"
-                                                               class="custom-switch-input">
+                                                               data-id="{{$item->id}}"
+                                                               data-name="show_at_slider"
+                                                               name="show_at_slider"
+                                                               class="custom-switch-input toggle-status">
                                                         <span class="custom-switch-indicator"></span>
                                                     </label>
                                                 </td>
@@ -90,8 +91,10 @@
                                                     <label class="custom-switch mt-2">
                                                         <input {{$item->show_at_popular === 1 ? 'checked' : ''}}
                                                                type="checkbox" value="1"
-                                                               name="is_breaking_news"
-                                                               class="custom-switch-input">
+                                                               data-id="{{$item->id}}"
+                                                               data-name="show_at_popular"
+                                                               name="show_at_popular"
+                                                               class="custom-switch-input toggle-status">
                                                         <span class="custom-switch-indicator"></span>
                                                     </label>
                                                 </td>
@@ -99,25 +102,13 @@
                                                     <label class="custom-switch mt-2">
                                                         <input {{$item->status === 1 ? 'checked' : ''}}
                                                                type="checkbox" value="1"
-                                                               name="is_breaking_news"
-                                                               class="custom-switch-input">
+                                                               data-id="{{$item->id}}"
+                                                               data-name="status"
+                                                               name="status"
+                                                               class="custom-switch-input toggle-status">
                                                         <span class="custom-switch-indicator"></span>
                                                     </label>
                                                 </td>
-                                                {{--                                                <td>--}}
-                                                {{--                                                    @if($item->show_at_navbar ===1)--}}
-                                                {{--                                                        <span class="badge badge-success ">Yes</span>--}}
-                                                {{--                                                    @else--}}
-                                                {{--                                                        <span class="badge badge-danger ">No</span>--}}
-                                                {{--                                                    @endif--}}
-                                                {{--                                                </td>--}}
-                                                {{--                                                <td>--}}
-                                                {{--                                                    @if($item->status === 1)--}}
-                                                {{--                                                        <span class="badge badge-success ">Yes</span>--}}
-                                                {{--                                                    @else--}}
-                                                {{--                                                        <span class="badge badge-danger ">No</span>--}}
-                                                {{--                                                    @endif--}}
-                                                {{--                                                </td>--}}
                                                 <td>
                                                     <a class="btn btn-primary"
                                                        href="{{route('admin.category.edit',$item->id)}}">
@@ -140,7 +131,6 @@
                 </div>
             </div>
 
-
         </div>
     </section>
 
@@ -157,6 +147,37 @@
             });
         });
         @endforeach
+
+
+        $(document).ready(function () {
+            $('.toggle-status').on('click', function () {
+                let id = $(this).data('id');
+                let url = "{{route('admin.toggle-news-status')}}";
+                let name = $(this).data('name');
+                let status = $(this).prop('checked') === true ? 1 : 0;
+                // alert(status);
+                $.ajax({
+                    method: "GET",
+                    url: url,
+                    data: {
+                        'id': id,
+                        'name': name,
+                        'status': status
+                    },
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            Toast.fire({
+                                icon: "success",
+                                title: "Updated successfully"
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+            });
+        });
 
     </script>
 @endsection

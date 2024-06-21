@@ -82,17 +82,27 @@
 
             $news->tags()->attach($tagIds);
 
-
             toast(__('Category have been Created successfully') , 'success');
             return redirect()->route('admin.news.index');
         }
 
         /**
-         * Display the specified resource.
+         * Change toggle status of news
          */
-        public function show()
+        public function toggleNewsStatus( Request $request )
         {
-            //
+            try {
+                $news = News::findOrFail($request->id);
+                $news->{$request->name} = $request->status;
+                $news->save();
+
+                return response([
+                    'status' => 'success' ,
+                    'message' => 'Updated successfully !'
+                ]);
+            } catch (\Throwable $th) {
+                throw $th;
+            }
         }
 
         /**

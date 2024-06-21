@@ -44,6 +44,8 @@
         //News Route
         Route::get('fetch-new-category' , [ NewsController::class , 'fetchCategory' ])->name('fetch-new-category');
 
+        Route::get('toggle-news-status' , [ NewsController::class , 'toggleNewsStatus' ])->name('toggle-news-status');
+
         Route::resource('news' , NewsController::class);
 
     });
