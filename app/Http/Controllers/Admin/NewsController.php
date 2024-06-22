@@ -114,7 +114,10 @@
 
             $news = News::findOrFail($id);
 
-            return view('admin.news.edit' , compact('languages' , 'news'));
+            $categories = Category::where('language' , $news->language)->get();
+
+
+            return view('admin.news.edit' , compact('languages' , 'news' , 'categories'));
         }
 
         /**
@@ -122,7 +125,7 @@
          */
         public function update( Request $request )
         {
-
+            dd($request->all());
         }
 
         /**

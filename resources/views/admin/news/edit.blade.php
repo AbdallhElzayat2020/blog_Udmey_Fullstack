@@ -16,7 +16,8 @@
 
             </div>
             <div class="card-body">
-                <form enctype="multipart/form-data" action="{{ route('admin.news.store') }}" method="post">
+                <form enctype="multipart/form-data" action="{{ route('admin.news.update', $news->id) }}" method="POST">
+                    @method('PUT')
                     @csrf
                     <div class="form-group">
                         <label for="language-select">Language Name</label>
@@ -24,7 +25,7 @@
                             <option>--Select--</option>
                             @foreach ($languages as $lang)
                                 <option
-                                    {{$lang->lang === $news->language ? 'selected' : ''}} value="{{ $lang->lang}}">
+                                        {{$lang->lang === $news->language ? 'selected' : ''}} value="{{ $lang->lang}}">
                                     {{ $lang->name}}
                                 </option>
                             @endforeach
@@ -38,6 +39,12 @@
                         <label for="category">Category</label>
                         <select name="category" id="category" class="form-control select2">
                             <option>--Select--</option>
+                            @foreach($categories as $category)
+                                <option
+                                        value="{{$category->id}}" {{$category->id === $news->category_id ? 'selected' : ''}}>
+                                    {{$category->name}}
+                                </option>
+                            @endforeach
                         </select>
                         @error('category')
                         <p class="text-danger">{{ $message }}</p>
@@ -48,7 +55,7 @@
                         <label for="content">Image</label>
                         <div id="image-preview" class="image-preview">
                             <label for="image-upload" id="image-label">Choose File</label>
-                            <input type="file" value="{{old('image')}}" name="image" id="image-upload">
+                            <input type="file" name="image" id="image-upload">
                         </div>
                         @error('image')
                         <p class="text-danger">{{ $message }}</p>
@@ -57,25 +64,16 @@
 
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input name="title" value="{{old('title')}}" id="title" type="text" class="form-control">
+                        <input name="title" value="{{$news->title}}" id="title" type="text" class="form-control">
                         @error('title')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
-
-                    {{--                    <div class="form-group">--}}
-                    {{--                        <label for="content">Content</label>--}}
-                    {{--                        <textarea name="content" id="content"--}}
-                    {{--                                  class="summernote-simple"></textarea>--}}
-                    {{--                        @error('content')--}}
-                    {{--                        <p class="text-danger">{{ $message }}</p>--}}
-                    {{--                        @enderror--}}
-                    {{--                    </div>--}}
                     <div class="form-group">
                         <label for="content">Content</label>
                         <textarea name="content" id="content"
-                                  class="form-control summernote-simple">{{ old('content') }}</textarea>
+                                  class="form-control summernote-simple">{{ $news->content }}</textarea>
                         @error('content')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -83,7 +81,9 @@
 
                     <div class="form-group">
                         <label for="tags" class="d-block">Tags</label>
-                        <input id="tags" value="{{old('tags')}}" name="tags" type="text" class="form-control inputtags">
+
+                        <input id="tags" value="{{formatTags($news->tags()->pluck('name')->toArray())}}" name="tags"
+                               type="text" class="form-control inputtags">
                         @error('tags')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -91,7 +91,7 @@
 
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
-                        <input name="meta_title" value="{{old('meta_title')}}" id="meta_title" type="text"
+                        <input name="meta_title" value="{{$news->meta_title}}" id="meta_title" type="text"
                                class="form-control">
                         @error('meta_title')
                         <p class="text-danger">{{ $message }}</p>
@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <label for="meta_description">Meta Description</label>
                         <textarea name="meta_description" id="meta_description"
-                                  class="form-control">{{ old('meta_description') }}</textarea>
+                                  class="form-control">{{ $news->meta_description }}</textarea>
                         @error('meta_description')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -113,7 +113,9 @@
                             <div class="form-group">
                                 <div class="control-label">Status</div>
                                 <label for="status" class="custom-switch mt-2">
-                                    <input type="checkbox" value="1" id="status" name="status"
+                                    <input type="checkbox" {{$news->status === 1 ? 'checked' : ''}} value="1"
+                                           id="status"
+                                           name="status"
                                            class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
@@ -124,7 +126,8 @@
                             <div class="form-group">
                                 <div class="control-label">Is Breaking News</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" value="1" name="is_breaking_news"
+                                    <input type="checkbox" {{$news->is_breaking_news === 1 ? 'checked' : ''}} value="1"
+                                           name="is_breaking_news"
                                            class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
@@ -134,7 +137,8 @@
                             <div class="form-group">
                                 <div class="control-label">Show At Slider</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" value="1" name="show_at_slider" class="custom-switch-input">
+                                    <input type="checkbox" {{$news->show_at_slider === 1 ? 'checked' : ''}} value="1"
+                                           name="show_at_slider" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
                             </div>
@@ -143,7 +147,8 @@
                             <div class="form-group">
                                 <div class="control-label">Show At Popular</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" value="1" name="show_at_popular"
+                                    <input type="checkbox" {{$news->show_at_popular === 1 ? 'checked' : ''}} value="1"
+                                           name="show_at_popular"
                                            class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
@@ -152,7 +157,7 @@
 
                     </div>
 
-                    <button class="btn btn-primary" type="submit">Create</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </form>
             </div>
         </div>
@@ -162,6 +167,16 @@
 @section('js')
     <script>
         $(document).ready(function () {
+            // Load Img
+            $(document).ready(function () {
+                $('.image-preview').css({
+                    "background-image": "url({{asset($news->image)}}",
+                    "background-size": "cover",
+                    "background-position": "center",
+                });
+            });
+
+            // Select Category with Language
             $('#language-select').on('change', function () {
                 let lang = $(this).val();
                 $.ajax({
