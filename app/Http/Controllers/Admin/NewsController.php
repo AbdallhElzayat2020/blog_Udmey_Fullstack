@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers\Admin;
 
+    use App\Http\Requests\Admin\AdminNewsUpdateRequest;
     use App\Models\Category;
     use App\Models\Language;
     use App\Models\News;
@@ -51,7 +52,9 @@
          */
         public function store( AdminNewsCreateRequest $request )
         {
+//            handle file upload
             $imgPath = $this->handleFileUpload($request , 'image');
+
             $news = new News();
             $news->language = $request->language;
             $news->category_id = $request->category;
@@ -123,16 +126,53 @@
         /**
          * Update the specified resource in storage.
          */
-        public function update( Request $request )
+        public function update( AdminNewsUpdateRequest $request , string $id )
         {
-            dd($request->all());
+            $news = News::findOrFail($id);
+
+            // handle file upload
+            $imgPath = $this->handleFileUpload($request , 'image' , $news->image);
+
+            $news->language = $request->language;
+            $news->category_id = $request->category;
+            $news->image = !empty($imgPath) ? $imgPath : $news->image;
+            $news->title = $request->title;
+            $news->slug = Str::slug($request->input('title'));
+            $news->content = $request->input('content');
+            $news->meta_title = $request->meta_title;
+            $news->meta_description = $request->meta_description;
+            $news->is_breaking_news = $request->is_breaking_news == 1 ? 1 : 0;
+            $news->show_at_slider = $request->show_at_slider == 1 ? 1 : 0;
+            $news->show_at_popular = $request->show_at_popular == 1 ? 1 : 0;
+            $news->status = $request->status == 1 ? 1 : 0;
+            $news->save();
+
+            //explode to ignore the comma and make an array
+            $tags = explode(',' , $request->tags);
+            $tagIds = [];
+
+//            Delete Previous Tags
+            $news->tags()->delete();
+//            detach Tages pivot Table
+            $news->tags()->detach($news->tags);
+            foreach ($tags as $tag) {
+                $item = new Tag();
+                $item->name = $tag;
+                $item->save();
+                $tagIds[] = $item->id;
+            }
+
+            $news->tags()->attach($tagIds);
+
+            toast(__('Udated successfully') , 'success');
+            return redirect()->route('admin.news.index');
         }
 
         /**
          * Remove the specified resource from storage.
          */
-        public function destroy()
+        public function destroy( $id )
         {
-
+            $news = News::findOrFail($id);
         }
     }

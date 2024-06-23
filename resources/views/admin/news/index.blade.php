@@ -114,7 +114,7 @@
                                                        href="{{route('admin.news.edit',$item->id)}}">
                                                         <i class="fas fa-edit" style="font-size:15px"></i></a>
                                                     <a class="btn btn-danger delete-item"
-                                                       href="{{route('admin.category.destroy',$item->id)}}">
+                                                       href="{{route('admin.news.destroy',$item->id)}}">
                                                         <i class="fas fa-trash" style="font-size:15px"></i>
                                                     </a>
                                                 </td>
