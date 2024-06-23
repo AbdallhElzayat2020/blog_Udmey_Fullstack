@@ -2,22 +2,22 @@
 
     namespace App\Http\Controllers\Admin;
 
+    use App\Http\Controllers\Controller;
+    use App\Http\Requests\Admin\AdminNewsCreateRequest;
     use App\Http\Requests\Admin\AdminNewsUpdateRequest;
     use App\Models\Category;
     use App\Models\Language;
     use App\Models\News;
     use App\Models\Tag;
-    use Illuminate\Http\Request;
     use App\traits\FileUploadTrait;
-
-    use App\Http\Controllers\Controller;
-    use App\Http\Requests\Admin\AdminNewsCreateRequest;
+    use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Str;
 
     class NewsController extends Controller
     {
         use FileUploadTrait;
+
 
         /**
          * Display a listing of the resource.
@@ -26,6 +26,7 @@
         {
 
             $languages = Language::all();
+
             return view('admin.news.index' , compact('languages'));
         }
 
@@ -35,6 +36,7 @@
         public function fetchCategory( Request $request )
         {
             $categories = Category::where('language' , $request->lang)->get();
+
             return $categories;
         }
 
@@ -44,6 +46,7 @@
         public function create()
         {
             $languages = Language::all();
+
             return view('admin.news.create' , compact('languages'));
         }
 
@@ -52,7 +55,7 @@
          */
         public function store( AdminNewsCreateRequest $request )
         {
-//            handle file upload
+            //            handle file upload
             $imgPath = $this->handleFileUpload($request , 'image');
 
             $news = new News();
@@ -85,6 +88,7 @@
             $news->tags()->attach($tagIds);
 
             toast(__('Category have been Created successfully') , 'success');
+
             return redirect()->route('admin.news.index');
         }
 
@@ -100,7 +104,7 @@
 
                 return response([
                     'status' => 'success' ,
-                    'message' => 'Updated successfully !'
+                    'message' => 'Updated successfully !' ,
                 ]);
             } catch (\Throwable $th) {
                 throw $th;
@@ -110,7 +114,6 @@
         /**
          * Show the form for editing the specified resource.
          */
-
         public function edit( $id )
         {
             $languages = Language::all();
@@ -118,7 +121,6 @@
             $news = News::findOrFail($id);
 
             $categories = Category::where('language' , $news->language)->get();
-
 
             return view('admin.news.edit' , compact('languages' , 'news' , 'categories'));
         }
@@ -151,9 +153,9 @@
             $tags = explode(',' , $request->tags);
             $tagIds = [];
 
-//            Delete Previous Tags
+            //            Delete Previous Tags
             $news->tags()->delete();
-//            detach Tages pivot Table
+            //            detach Tages pivot Table
             $news->tags()->detach($news->tags);
             foreach ($tags as $tag) {
                 $item = new Tag();
@@ -165,14 +167,25 @@
             $news->tags()->attach($tagIds);
 
             toast(__('Udated successfully') , 'success');
+
             return redirect()->route('admin.news.index');
         }
 
         /**
          * Remove the specified resource from storage.
          */
-        public function destroy( $id )
+        public function destroy( string $id )
         {
-            $news = News::findOrFail($id);
-        }
+//            $news - News::findOrFail($id)
+//            deleteFile($news->image);
+//            $news->delete();
+//
+//            return response([
+//                'status' => 'success' ,
+//                'message' => 'Deleted successfully !' ,
+//            ])
+//
+//            return redirect()->route('admin.news.index');
+//        }
+    }
     }

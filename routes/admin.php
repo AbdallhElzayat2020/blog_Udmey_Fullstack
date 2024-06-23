@@ -27,12 +27,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('reset-password', [AdminAuthController::class, 'handleResetPassword'])->name('reset-password.send');
 
 });
-
 //Protected Routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     //Profile Route
     Route::put('profile-password/{id}', [AdminProfileController::class, 'passwordUpdate'])->name('profile-password.update');
+
     Route::resource('profile', AdminProfileController::class);
     //Language Route
     Route::resource('language', LanguageController::class);
