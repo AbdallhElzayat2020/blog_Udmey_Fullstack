@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('language');
             $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->foreignId('category_id')->constrained('id')->on('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('author_id')->references('id')->on('admins')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title');
             $table->text('image');
@@ -29,7 +30,6 @@ return new class extends Migration
             $table->boolean('show_at_slider')->default(0);
             $table->boolean('show_at_popular')->default(0);
             $table->boolean('status')->default(0);
-
 
             $table->timestamps();
         });

@@ -167,14 +167,14 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            // Load Img
-            $(document).ready(function () {
-                $('.image-preview').css({
-                    "background-image": "url({{asset($news->image)}}",
-                    "background-size": "cover",
-                    "background-position": "center",
-                });
+            // Load Img$(document).ready(function () {
+            $('.image-preview').css({
+                "background-image": "url({{asset($news->image)}}",
+                "background-size": "cover",
+                "background-position": "center",
             });
+        });
+
 
             // Select Category with Language
             $('#language-select').on('change', function () {

@@ -134,7 +134,7 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
 
-        // handle file upload
+        // handle file uploadA
         $imgPath = $this->handleFileUpload($request, 'image', $news->image);
 
         $news->language = $request->language;
@@ -179,6 +179,7 @@ class NewsController extends Controller
     public function destroy(string $id)
     {
         $news = News::findOrFail($id);
+        News::withTrashed()->where('id', $id)->restore();
         $this->deleteFile($news->image);
         $news->tags()->delete();
         $news->delete();

@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     //Language Route
     Route::resource('language', LanguageController::class);
     //Category Route
-    Route::resource('category', CategoryController::class); //Category Route
+    Route::resource('category', CategoryController::class);
     //News Route
     Route::get('fetch-new-category', [NewsController::class, 'fetchCategory'])->name('fetch-new-category');
     Route::get('toggle-news-status', [NewsController::class, 'toggleNewsStatus'])->name('toggle-news-status');
