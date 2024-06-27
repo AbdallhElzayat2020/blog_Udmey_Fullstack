@@ -104,12 +104,16 @@
                                                         </label>
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-primary"
+                                                        <a class="btn btn-primary mt-1"
                                                             href="{{ route('admin.news.edit', $item->id) }}">
                                                             <i class="fas fa-edit" style="font-size:15px"></i></a>
-                                                        <a class="btn btn-danger delete-item"
+                                                        <a class="btn btn-danger mt-1 delete-item"
                                                             href="{{ route('admin.news.destroy', $item->id) }}">
                                                             <i class="fas fa-trash" style="font-size:15px"></i>
+                                                        </a>
+                                                        <a class="btn btn-info mt-1"
+                                                            href="{{ route('admin.news-copy', $item->id) }}">
+                                                            <i class="fas fa-copy" style="font-size:15px"></i>
                                                         </a>
                                                     </td>
                                                 </tr>

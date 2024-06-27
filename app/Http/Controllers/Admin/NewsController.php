@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\AdminNewsCreateRequest;
 use App\Http\Requests\Admin\AdminNewsUpdateRequest;
 
@@ -57,7 +58,7 @@ class NewsController extends Controller
      */
     public function store(AdminNewsCreateRequest $request)
     {
-        //            handle file upload
+        // التعامل مع رفع الملف
         $imgPath = $this->handleFileUpload($request, 'image');
 
         $news = new News();
@@ -76,10 +77,15 @@ class NewsController extends Controller
         $news->status = $request->status == 1 ? 1 : 0;
         $news->save();
 
-        //explode to ignore the comma and make an array
+        // التعامل مع الوسوم
         $tags = explode(',', $request->tags);
         $tagIds = [];
 
+        // foreach ($tags as $tag) {
+        //     $item = Tag::firstOrCreate(['name' => $tag]);
+        //     $tagIds[] = $item->id;
+        // }
+                
         foreach ($tags as $tag) {
             $item = new Tag();
             $item->name = $tag;
@@ -134,15 +140,15 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
 
-        // handle file uploadA
-        $imgPath = $this->handleFileUpload($request, 'image', $news->image);
+        // handle file upload
+        $imgPath = $this->handleFileUpload($request, 'image');
 
         $news->language = $request->language;
         $news->category_id = $request->category;
         $news->image = !empty($imgPath) ? $imgPath : $news->image;
         $news->title = $request->title;
-        $news->slug = Str::slug($request->input('title'));
-        $news->content = $request->input('content');
+        $news->slug = Str::slug($request->title);
+        $news->content = $request->content;
         $news->meta_title = $request->meta_title;
         $news->meta_description = $request->meta_description;
         $news->is_breaking_news = $request->is_breaking_news == 1 ? 1 : 0;
@@ -179,10 +185,47 @@ class NewsController extends Controller
     public function destroy(string $id)
     {
         $news = News::findOrFail($id);
-        News::withTrashed()->where('id', $id)->restore();
         $this->deleteFile($news->image);
         $news->tags()->delete();
         $news->delete();
         return response(['status' => 'success', 'message' => 'Deleted successfully']);
     }
+
+    /**
+     * Copy News 
+     */
+    // public function copyNews(string $id)
+    // {
+    //     $news = News::findOrFail($id);
+    //     $copyNews = $news->replicate();
+    //     // $copyNews->image = $news->image; // Ensure the image path is copied
+    //     $copyNews->save();
+
+    //     toast(__('Copied successfully'), 'success');
+    //     return redirect()->back();
+    // }
+    public function copyNews($id)
+    {
+        // جلب البيانات الأصلية
+        $news = News::findOrFail($id);
+
+        // عمل نسخة جديدة من الكائن
+        $newNews = $news->replicate();
+        
+        // نسخ الصورة إلى مسار جديد باستخدام دالة duplicateFile من الـ Trait
+        if ($news->image) {
+            $newImagePath = $this->duplicateFile($news->image);
+            $newNews->image = $newImagePath;
+        }
+
+        // حفظ النسخة الجديدة في قاعدة البيانات
+        $newNews->save();
+        
+        // نسخ العلاقات المرتبطة (مثل الوسوم)
+        $newNews->tags()->attach($news->tags);
+
+        toast(__('News have been Cloned successfully'), 'success');
+
+        return redirect()->route('admin.news.index');
+    }   
 }

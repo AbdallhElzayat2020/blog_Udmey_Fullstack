@@ -24,14 +24,13 @@
                         <select name="language" id="language-select" class="form-control select2">
                             <option>--Select--</option>
                             @foreach ($languages as $lang)
-                                <option
-                                        {{$lang->lang === $news->language ? 'selected' : ''}} value="{{ $lang->lang}}">
-                                    {{ $lang->name}}
+                                <option {{ $lang->lang === $news->language ? 'selected' : '' }} value="{{ $lang->lang }}">
+                                    {{ $lang->name }}
                                 </option>
                             @endforeach
                         </select>
                         @error('language')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -39,15 +38,15 @@
                         <label for="category">Category</label>
                         <select name="category" id="category" class="form-control select2">
                             <option>--Select--</option>
-                            @foreach($categories as $category)
-                                <option
-                                        value="{{$category->id}}" {{$category->id === $news->category_id ? 'selected' : ''}}>
-                                    {{$category->name}}
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ $category->id === $news->category_id ? 'selected' : '' }}>
+                                    {{ $category->name }}
                                 </option>
                             @endforeach
                         </select>
                         @error('category')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -58,53 +57,52 @@
                             <input type="file" name="image" id="image-upload">
                         </div>
                         @error('image')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input name="title" value="{{$news->title}}" id="title" type="text" class="form-control">
+                        <input name="title" value="{{ $news->title }}" id="title" type="text"
+                            class="form-control">
                         @error('title')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="content">Content</label>
-                        <textarea name="content" id="content"
-                                  class="form-control summernote-simple">{{ $news->content }}</textarea>
+                        <textarea name="content" id="content" class="form-control summernote-simple">{{ $news->content }}</textarea>
                         @error('content')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="tags" class="d-block">Tags</label>
 
-                        <input id="tags" value="{{formatTags($news->tags()->pluck('name')->toArray())}}" name="tags"
-                               type="text" class="form-control inputtags">
+                        <input id="tags" value="{{ formatTags($news->tags()->pluck('name')->toArray()) }}"
+                            name="tags" type="text" class="form-control inputtags">
                         @error('tags')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
-                        <input name="meta_title" value="{{$news->meta_title}}" id="meta_title" type="text"
-                               class="form-control">
+                        <input name="meta_title" value="{{ $news->meta_title }}" id="meta_title" type="text"
+                            class="form-control">
                         @error('meta_title')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
                         <label for="meta_description">Meta Description</label>
-                        <textarea name="meta_description" id="meta_description"
-                                  class="form-control">{{ $news->meta_description }}</textarea>
+                        <textarea name="meta_description" id="meta_description" class="form-control">{{ $news->meta_description }}</textarea>
                         @error('meta_description')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -113,10 +111,8 @@
                             <div class="form-group">
                                 <div class="control-label">Status</div>
                                 <label for="status" class="custom-switch mt-2">
-                                    <input type="checkbox" {{$news->status === 1 ? 'checked' : ''}} value="1"
-                                           id="status"
-                                           name="status"
-                                           class="custom-switch-input">
+                                    <input type="checkbox" {{ $news->status === 1 ? 'checked' : '' }} value="1"
+                                        id="status" name="status" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
                             </div>
@@ -126,9 +122,8 @@
                             <div class="form-group">
                                 <div class="control-label">Is Breaking News</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" {{$news->is_breaking_news === 1 ? 'checked' : ''}} value="1"
-                                           name="is_breaking_news"
-                                           class="custom-switch-input">
+                                    <input type="checkbox" {{ $news->is_breaking_news === 1 ? 'checked' : '' }}
+                                        value="1" name="is_breaking_news" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
                             </div>
@@ -137,8 +132,8 @@
                             <div class="form-group">
                                 <div class="control-label">Show At Slider</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" {{$news->show_at_slider === 1 ? 'checked' : ''}} value="1"
-                                           name="show_at_slider" class="custom-switch-input">
+                                    <input type="checkbox" {{ $news->show_at_slider === 1 ? 'checked' : '' }}
+                                        value="1" name="show_at_slider" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
                             </div>
@@ -147,9 +142,8 @@
                             <div class="form-group">
                                 <div class="control-label">Show At Popular</div>
                                 <label class="custom-switch mt-2">
-                                    <input type="checkbox" {{$news->show_at_popular === 1 ? 'checked' : ''}} value="1"
-                                           name="show_at_popular"
-                                           class="custom-switch-input">
+                                    <input type="checkbox" {{ $news->show_at_popular === 1 ? 'checked' : '' }}
+                                        value="1" name="show_at_popular" class="custom-switch-input">
                                     <span class="custom-switch-indicator"></span>
                                 </label>
                             </div>
@@ -166,39 +160,39 @@
 
 @section('js')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Load Img$(document).ready(function () {
             $('.image-preview').css({
-                "background-image": "url({{asset($news->image)}}",
+                "background-image": "url({{ asset($news->image) }}",
                 "background-size": "cover",
                 "background-position": "center",
             });
         });
 
 
-            // Select Category with Language
-            $('#language-select').on('change', function () {
-                let lang = $(this).val();
-                $.ajax({
-                    method: 'GET',
-                    url: '{{ route('admin.fetch-new-category') }}',
-                    data: {
-                        lang: lang
-                    },
-                    success: function (data) {
-                        $('#category').html("");
-                        $('#category').html(`<option value=''>---Choose Category---</option>`);
+        // Select Category with Language
+        $('#language-select').on('change', function() {
+        let lang = $(this).val();
+        $.ajax({
+            method: 'GET',
+            url: '{{ route('admin.fetch-new-category') }}',
+            data: {
+                lang: lang
+            },
+            success: function(data) {
+                $('#category').html("");
+                $('#category').html(`<option value=''>---Choose Category---</option>`);
 
-                        $.each(data, function (index, data) {
-                            $('#category').append(
-                                `<option value="${data.id}">${data.name}</option>`);
-                        })
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
+                $.each(data, function(index, data) {
+                    $('#category').append(
+                        `<option value="${data.id}">${data.name}</option>`);
                 })
-            })
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+        })
         });
     </script>
 @endsection
