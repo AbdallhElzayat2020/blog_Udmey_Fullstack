@@ -6,7 +6,7 @@
 
 @section("content")
     <!-- Tranding news  carousel-->
-    @include('frontEnd.home-components.tranding-news')
+    @include('frontEnd.home-components.breaking-news')
     <!-- End Tranding news carousel -->
 
     <!-- start hero-slider -->
