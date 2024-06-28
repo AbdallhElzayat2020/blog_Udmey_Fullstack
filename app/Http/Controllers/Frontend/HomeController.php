@@ -1,14 +1,16 @@
 <?php
 
-    namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend;
 
-    use App\Http\Controllers\Controller;
-    use Illuminate\Http\Request;
+use App\Models\Language;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-    class HomeController extends Controller
+class HomeController extends Controller
+{
+    public function index()
     {
-        public function index()
-        {
-            return view('frontend.home');
-        }
+        $languages = Language::where('status', 1)->get();
+        return view('frontend.home', compact('languages'));
     }
+}

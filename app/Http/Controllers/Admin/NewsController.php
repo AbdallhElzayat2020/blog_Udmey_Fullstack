@@ -21,7 +21,6 @@ class NewsController extends Controller
 {
     use FileUploadTrait;
 
-
     /**
      * Display a listing of the resource.
      */
@@ -42,7 +41,6 @@ class NewsController extends Controller
 
         return $categories;
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -85,7 +83,7 @@ class NewsController extends Controller
         //     $item = Tag::firstOrCreate(['name' => $tag]);
         //     $tagIds[] = $item->id;
         // }
-                
+
         foreach ($tags as $tag) {
             $item = new Tag();
             $item->name = $tag;
@@ -211,7 +209,7 @@ class NewsController extends Controller
 
         // عمل نسخة جديدة من الكائن
         $newNews = $news->replicate();
-        
+
         // نسخ الصورة إلى مسار جديد باستخدام دالة duplicateFile من الـ Trait
         if ($news->image) {
             $newImagePath = $this->duplicateFile($news->image);
@@ -220,12 +218,12 @@ class NewsController extends Controller
 
         // حفظ النسخة الجديدة في قاعدة البيانات
         $newNews->save();
-        
+
         // نسخ العلاقات المرتبطة (مثل الوسوم)
         $newNews->tags()->attach($news->tags);
 
         toast(__('News have been Cloned successfully'), 'success');
 
         return redirect()->route('admin.news.index');
-    }   
+    }
 }

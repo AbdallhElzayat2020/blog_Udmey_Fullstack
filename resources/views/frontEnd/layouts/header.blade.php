@@ -27,12 +27,12 @@
                     <div class="list-unstyled topbar-right d-flex align-items-center justify-content-end">
                         <div class="topbar_language">
                             <select>
-                                <option>English</option>
-                                <option>Arabic</option>
-                                <option>Korean</option>
+                                @foreach ($languages as $language)
+                                    <option value="{{ $language->lang }}"
+                                        {{ $language->default === 1 ? 'selected' : '' }}>{{ $language->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-
                         <ul class="topbar-link">
                             <li><a href="login.html">Login</a></li>
                             <li><a href="register.html">Register</a></li>
@@ -101,12 +101,12 @@
                                     <div class="row no-gutters mt-3">
                                         <div class="col">
                                             <input class="form-control border-secondary border-right-0 rounded-0"
-                                                   type="search" value="" placeholder="Search "
-                                                   id="example-search-input4">
+                                                type="search" value="" placeholder="Search "
+                                                id="example-search-input4">
                                         </div>
                                         <div class="col-auto">
                                             <a class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right"
-                                               href="/search-result.html">
+                                                href="/search-result.html">
                                                 <i class="fa fa-search"></i>
                                             </a>
                                         </div>
@@ -133,7 +133,7 @@
                         <div class="row no-gutters">
                             <div class="col">
                                 <input class="form-control border-secondary border-right-0 rounded-0" value=""
-                                       placeholder="Search">
+                                    placeholder="Search">
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
@@ -160,7 +160,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active dropdown-toggle  text-dark" href="#"
-                                   data-toggle="dropdown">Pages </a>
+                                    data-toggle="dropdown">Pages </a>
                                 <ul class="dropdown-menu dropdown-menu-left">
                                     <li><a class="dropdown-item" href="blog_details.html">Blog details</a></li>
                                     <li><a class="dropdown-item" href="404.html"> 404 Error</a></li>
@@ -175,9 +175,9 @@
                 </div>
                 <div class="modal-footer">
                     <p>© 2020 <a href="https://websolutionus.com/.com">WebSolutionUS</a>
-                       -
-                       Premium template news, blog & magazine &amp;
-                       magazine theme by <a href="https://websolutionus.com/.com">websolutionus.com</a></p>
+                        -
+                        Premium template news, blog & magazine &amp;
+                        magazine theme by <a href="https://websolutionus.com/.com">websolutionus.com</a></p>
                 </div>
             </div>
         </div>
