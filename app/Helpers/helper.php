@@ -3,6 +3,7 @@
 /* Helper Function for news tags */
 
 use App\Models\Language;
+use Illuminate\Support\Str;
 
 function formatTags(array $tags): string
 {
@@ -35,5 +36,10 @@ function getLanguage(): string
 function setLanguage(string $code): void
 {
     session(['language' => $code]);
+}
 
+/*  Truncate Text limit for text  */
+function truncateText(string $text, int $limit = 20): string
+{
+    return Str::limit($text, $limit, '...');
 }

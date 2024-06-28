@@ -12,7 +12,6 @@
                                         <img src="{{ asset($news->image) }}" class="img-fluid" alt="">
                                     </a>
                                 </div>
-
                                 <div class="card__post__body ">
                                     <div class="card__post__content">
 
@@ -20,7 +19,7 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <span class="text-primary">
-                                                        By{{ $news->author_id }}
+                                                        By{{ $news->author->name }}
                                                     </span>
                                                 </li>
                                                 <li class="list-inline-item">
@@ -34,7 +33,7 @@
                                         <div class="card__post__title">
                                             <h6>
                                                 <a href="">
-                                                    {!! $news->title !!}
+                                                    {!! truncateText($news->title) !!}
                                                 </a>
                                             </h6>
                                         </div>
