@@ -65,11 +65,10 @@
                         <img src="images/logo1.png" alt="" class="img-fluid logo">
                     </a>
                 </figure>
-
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">home</a>
+                            <a class="nav-link active" href="{{ url('/') }}">home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="about-us.html"> about </a>

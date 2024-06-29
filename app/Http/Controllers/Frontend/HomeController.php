@@ -41,6 +41,7 @@ class HomeController extends Controller
         // Example: /news/some-news-slug
         // This method should retrieve the news entry by its slug and pass it to the view.
         // For now, it simply returns the news details view.
-        return view('frontEnd.news-details');
+        $news = News::with(['author'])->where('slug', $slug)->ActiveEntryis()->first();
+        return view('frontEnd.news-details', compact('news'));
     }
 }

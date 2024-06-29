@@ -9,14 +9,11 @@
                     <!-- Breadcrumb -->
                     <ul class="breadcrumbs bg-light mb-4">
                         <li class="breadcrumbs__item">
-                            <a href="index.html" class="breadcrumbs__url">
+                            <a href="{{ url('/') }}" class="breadcrumbs__url">
                                 <i class="fa fa-home"></i> Home</a>
                         </li>
                         <li class="breadcrumbs__item">
-                            <a href="index.html" class="breadcrumbs__url">News</a>
-                        </li>
-                        <li class="breadcrumbs__item breadcrumbs__item--current">
-                            World
+                            <a href="javascript:;" class="breadcrumbs__url">News</a>
                         </li>
                     </ul>
                     <!-- end breadcrumb -->
@@ -27,32 +24,30 @@
                     <div class="wrap__article-detail">
                         <div class="wrap__article-detail-title">
                             <h1>
-                                These Are the 5 Big Tech Stories to Watch in 2017
+                                {!! $news->title !!}
                             </h1>
-                            <h3>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae, hic.
-                            </h3>
+
                         </div>
                         <hr>
                         <div class="wrap__article-detail-info">
                             <ul class="list-inline d-flex flex-wrap justify-content-start">
                                 <li class="list-inline-item">
                                     By
-                                    <a href="#">
-                                        john doe,
+                                    <a href="javascript:;">
+                                        {{ $news->author->name }}
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <span class="text-dark text-capitalize ml-1">
-                                        descember 09, 2016
+                                        {{ date('M d , Y', strtotime($news->created_at)) }}
                                     </span>
                                 </li>
                                 <li class="list-inline-item">
                                     <span class="text-dark text-capitalize">
-                                        in
+                                        in Category
                                     </span>
-                                    <a href="#">
-                                        business
+                                    <a href="javascript:;">
+                                        [ {{ $news->category->name }} ]
                                     </a>
 
 
@@ -62,7 +57,7 @@
 
                         <div class="wrap__article-detail-image mt-4">
                             <figure>
-                                <img src="images/newsimage3.png" alt="" class="img-fluid">
+                                <img src="{{ asset($news->image) }}" alt="" class="img-fluid">
                             </figure>
                         </div>
                         <div class="wrap__article-detail-content">
@@ -77,33 +72,33 @@
                                 <ul class="list-inline">
                                     <span class="share">share on:</span>
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o facebook" href="#">
+                                        <a class="btn btn-social-o facebook" href="javascript:;">
                                             <i class="fa fa-facebook-f"></i>
                                             <span>facebook</span>
                                         </a>
 
                                     </li>
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o twitter" href="#">
+                                        <a class="btn btn-social-o twitter" href="javascript:;">
                                             <i class="fa fa-twitter"></i>
                                             <span>twitter</span>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o whatsapp" href="#">
+                                        <a class="btn btn-social-o whatsapp" href="javascript:;">
                                             <i class="fa fa-whatsapp"></i>
                                             <span>whatsapp</span>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o telegram" href="#">
+                                        <a class="btn btn-social-o telegram" href="javascript:;">
                                             <i class="fa fa-telegram"></i>
                                             <span>telegram</span>
                                         </a>
                                     </li>
 
                                     <li class="list-inline-item">
-                                        <a class="btn btn-linkedin-o linkedin" href="#">
+                                        <a class="btn btn-linkedin-o linkedin" href="javascript:;">
                                             <i class="fa fa-linkedin"></i>
                                             <span>linkedin</span>
                                         </a>
@@ -112,65 +107,8 @@
                                 </ul>
                             </div>
                             <p class="has-drop-cap-fluid">
-                                Even the all-powerful Pointing has no control about the blind texts it is an almost
-                                unorthographic life One
-                                day however a small line of blind text by the name of Lorem Ipsum decided to leave for
-                                the far World of
-                                Grammar.
-
-                                Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                                there live the
-                                blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics,
-                                a large language
-                                ocean. A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.
-                                <br>
-                                <br>
-                                The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild
-                                Question Marks and
-                                devious Semikoli, but the Little Blind Text didn’t listen. On her way she met a copy.
-                                The copy warned the
-                                Little Blind Text, that where it came from it would have been rewritten a thousand times
-                                and everything that
-                                was left from its origin would be the word “and” and the Little Blind Text should turn
-                                around and return to
-                                its own, safe country.
-
-                                <br>
-                                The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild
-                                Question Marks and
-                                devious Semikoli, but the Little Blind Text didn’t listen. On her way she met a copy.
-                                The copy warned the
-                                Little Blind Text, that where it came from it would have been rewritten a thousand times
-                                and everything that
-                                was left from its origin would be the word “and” and the Little Blind Text should turn
-                                around and return to
-                                its own, safe country.
-                            </p>
-
-                            <!-- Blockquote  -->
-                            <blockquote class="block-quote">
-                                <p>
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at
-                                    its layout.
-                                </p>
-                                <cite>
-                                    Tom Cruise
-                                </cite>
-                            </blockquote>
-                            <!-- Blockquote -->
-
-
-                            <h5>How Tech Startup Survive Without Funding</h5>
-                            <p>
-                                Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                                there live the
-                                blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics,
-                                a large language
-                                ocean. A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.
-                            </p>
+                              {!! $news->content !!}
+                         </p>
                         </div>
 
 
