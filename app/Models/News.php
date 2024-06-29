@@ -9,6 +9,23 @@ class News extends Model
 {
     use HasFactory;
 
+    // scope reuseble Query for ActiveEntryis
+    public function scopeActiveEntryis($query)
+    {
+        return $query->where([
+            'status' => 1,
+            'is_approved' => 1,
+        ]);
+    }
+    // reuseble Query for Localize
+    public function scopeWithLocalize($query)
+    {
+        return $query->where([
+            'language' => getLanguage(),
+        ]);
+    }
+
+
     public function category()
     {
         return $this->belongsTo(Category::class);

@@ -1,3 +1,6 @@
+@php
+    $languages = \App\Models\Language::where('status', 1)->get();
+@endphp
 <!-- Header news -->
 <header class="bg-light">
     <!-- Navbar  Top-->

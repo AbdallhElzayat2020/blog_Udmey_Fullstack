@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\frontend\LanguageController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +31,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+
 //invoke controller for Language
 Route::get('language', LanguageController::class)->name('language');
 
-
+// News Details Route
+Route::get('news-details/{slug}',[HomeController::class, 'showNews'])->name('news-details');
 
