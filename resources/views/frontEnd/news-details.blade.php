@@ -63,7 +63,7 @@
                         <div class="wrap__article-detail-content">
                             <div class="total-views">
                                 <div class="total-views-read">
-                                    15.k
+                                    {{ $news->views }}
                                     <span>
                                         views
                                     </span>
@@ -107,8 +107,8 @@
                                 </ul>
                             </div>
                             <p class="has-drop-cap-fluid">
-                              {!! $news->content !!}
-                         </p>
+                                {!! $news->content !!}
+                            </p>
                         </div>
 
 

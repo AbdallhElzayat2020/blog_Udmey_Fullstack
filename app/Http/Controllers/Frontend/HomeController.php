@@ -16,7 +16,10 @@ class HomeController extends Controller
     /**
      * Displays the homepage with breaking news.
      *
+     * This method retrieves the 5 latest breaking news entries and passes them to the homepage view.
+     *
      * @return \Illuminate\View\View
+     * @example <http://example.com/> (Homepage with breaking news)
      */
     public function index()
     {
@@ -33,15 +36,48 @@ class HomeController extends Controller
     /**
      * Displays a single news entry by its slug.
      *
+     * This method retrieves a news entry by its slug and passes it to the news details view.
+     *
      * @param string $slug The slug of the news entry.
      * @return \Illuminate\View\View
+     * @example <http://example.com/news/some-news-slug> (News details page)
      */
     public function showNews(string $slug)
     {
-        // Example: /news/some-news-slug
-        // This method should retrieve the news entry by its slug and pass it to the view.
-        // For now, it simply returns the news details view.
-        $news = News::with(['author'])->where('slug', $slug)->ActiveEntryis()->first();
+        // Retrieve the news entry by its slug
+        $news = News::with(['author'])->where('slug', $slug)
+            ->ActiveEntryis()->withLocalize()
+            ->first();
+
+        // Increment the news entry's view count
+        $this->countView($news);
+
         return view('frontEnd.news-details', compact('news'));
+    }
+
+    /**
+     * Increments the view count of a news entry.
+     *
+     * @param \App\Models\News $news The news entry to increment the view count for.
+     * @return void
+     */
+    public function countView($news)
+    {
+        if (session()->has('viewed_post')) {
+
+            $postIds = session('viewed_post');
+
+            if (!in_array($news->id, $postIds,)) {
+
+                $postIds[] = $news->id;
+
+                $news->increment('views');
+            }
+            session(['viewed_post' => $postIds]);
+        } else {
+
+            session(['viewed_post' => [$news->id]]);
+            $news->increment('views');
+        }
     }
 }
