@@ -45,14 +45,17 @@ class HomeController extends Controller
     public function showNews(string $slug)
     {
         // Retrieve the news entry by its slug
-        $news = News::with(['author'])->where('slug', $slug)
+        $news = News::with(['author', 'tags'])->where('slug', $slug)
             ->ActiveEntryis()->withLocalize()
             ->first();
+
+        $resentNews = News::with(['category','author'])->where('slug', '!=', $news->slug)
+            ->ActiveEntryis()->withLocalize()->orderBy('id', 'DESC')->take(4)->get();
 
         // Increment the news entry's view count
         $this->countView($news);
 
-        return view('frontEnd.news-details', compact('news'));
+        return view('frontEnd.news-details', compact('news', 'resentNews'));
     }
 
     /**
@@ -63,21 +66,23 @@ class HomeController extends Controller
      */
     public function countView($news)
     {
-        if (session()->has('viewed_post')) {
+        if ($news) {
+            if (session()->has('viewed_post')) {
 
-            $postIds = session('viewed_post');
+                $postIds = session('viewed_post');
 
-            if (!in_array($news->id, $postIds,)) {
+                if (!in_array($news->id, $postIds)) {
 
-                $postIds[] = $news->id;
+                    $postIds[] = $news->id;
 
+                    $news->increment('views');
+                }
+                session(['viewed_post' => $postIds]);
+            } else {
+
+                session(['viewed_post' => [$news->id]]);
                 $news->increment('views');
             }
-            session(['viewed_post' => $postIds]);
-        } else {
-
-            session(['viewed_post' => [$news->id]]);
-            $news->increment('views');
         }
     }
 }
