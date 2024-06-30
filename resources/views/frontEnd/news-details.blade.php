@@ -105,7 +105,7 @@
                                 </ul>
                             </div>
                             <p class="has-drop-cap-fluid">
-                                {!! truncateText($news->content,70) !!}
+                                {!! truncateText($news->content, 70) !!}
                             </p>
                         </div>
 
@@ -208,7 +208,7 @@
 
                                     <div class="reply">
                                         <a href="#" class="comment-reply-link" data-toggle="modal"
-                                           data-target="#exampleModal">Reply</a>
+                                            data-target="#exampleModal">Reply</a>
                                         <span>
                                             <i class="fa fa-trash"></i>
                                         </span>
@@ -241,7 +241,7 @@
 
                                             <div class="reply">
                                                 <a href="#" class="comment-reply-link" data-toggle="modal"
-                                                   data-target="#exampleModal">Reply</a>
+                                                    data-target="#exampleModal">Reply</a>
                                                 <span>
                                                     <i class="fa fa-trash"></i>
                                                 </span>
@@ -276,7 +276,7 @@
 
                                     <div class="reply">
                                         <a href="#" class="comment-reply-link" data-toggle="modal"
-                                           data-target="#exampleModal">Reply</a>
+                                            data-target="#exampleModal">Reply</a>
                                         <span>
                                             <i class="fa fa-trash"></i>
                                         </span>
@@ -296,8 +296,7 @@
                                 </p>
                                 <p class="comment-form-comment">
                                     <label for="comment">Comment</label>
-                                    <textarea name="comment" id="comment" cols="45" rows="5" maxlength="65525"
-                                              required="required"></textarea>
+                                    <textarea name="comment" id="comment" cols="45" rows="5" maxlength="65525" required="required"></textarea>
                                 </p>
                                 <p class="comment-form-author">
                                     <label>Name <span class="required">*</span></label>
@@ -313,14 +312,14 @@
                                 </p>
                                 <p class="comment-form-cookies-consent">
                                     <input type="checkbox" value="yes" name="wp-comment-cookies-consent"
-                                           id="wp-comment-cookies-consent">
+                                        id="wp-comment-cookies-consent">
                                     <label for="wp-comment-cookies-consent">Save my name, email, and website in this
                                         browser for the next
                                         span I comment.</label>
                                 </p>
                                 <p class="form-submit mb-0">
                                     <input type="submit" name="submit" id="submit" class="submit"
-                                           value="Post Comment">
+                                        value="Post Comment">
                                 </p>
                             </form>
                         </div>
@@ -328,7 +327,7 @@
                     <!-- Modal -->
                     <div class="comment_modal">
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
+                            aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -553,7 +552,7 @@
                                     <div class="row no-gutters">
                                         <div class="col">
                                             <input class="form-control border-secondary border-right-0 rounded-0"
-                                                   value="" placeholder="Search">
+                                                value="" placeholder="Search">
                                         </div>
                                         <div class="col-auto">
                                             <button
@@ -567,14 +566,14 @@
 
                             <div class="wrapper__list__article-small">
                                 @foreach ($resentNews as $resentNew)
-                                    @if($loop->index<=2)
+                                    @if ($loop->index <= 2)
                                         <div class="mb-3">
                                             <!-- Post Article -->
                                             <div class="card__post card__post-list">
                                                 <div class="image-sm">
-                                                    <a href="{{route('news-details',$resentNew->slug)}}">
+                                                    <a href="{{ route('news-details', $resentNew->slug) }}">
                                                         <img src="{{ asset($resentNew->image) }}" class="img-fluid"
-                                                             alt="">
+                                                            alt="">
                                                     </a>
                                                 </div>
                                                 <div class="card__post__body ">
@@ -583,22 +582,22 @@
                                                         <div class="card__post__author-info mb-2">
                                                             <ul class="list-inline">
                                                                 <li class="list-inline-item">
-                                                                <span class="text-primary">
-                                                                   {{ $resentNew->author->name }}
-                                                                </span>
+                                                                    <span class="text-primary">
+                                                                        {{ $resentNew->author->name }}
+                                                                    </span>
                                                                 </li>
                                                                 <li class="list-inline-item">
-                                                                <span class="text-dark text-capitalize">
-                                                                    {{date('M d ,Y',strtotime($resentNew->created_at))}}
-                                                                </span>
+                                                                    <span class="text-dark text-capitalize">
+                                                                        {{ date('M d ,Y', strtotime($resentNew->created_at)) }}
+                                                                    </span>
                                                                 </li>
 
                                                             </ul>
                                                         </div>
                                                         <div class="card__post__title">
                                                             <h6>
-                                                                <a href="{{route('news-details',$resentNew->slug)}}">
-                                                                    {{truncateText($resentNew->title)}}
+                                                                <a href="{{ route('news-details', $resentNew->slug) }}">
+                                                                    {{ truncateText($resentNew->title) }}
                                                                 </a>
                                                             </h6>
                                                         </div>
@@ -607,36 +606,37 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if($loop->index === 3)
+                                    @if ($loop->index === 3)
                                         <div class="article__entry">
                                             <div class="article__image">
-                                                <a href="{{route('news-details',$resentNew->slug)}}">
-                                                    <img src="{{asset($resentNew->image)}}" alt="" class="img-fluid">
+                                                <a href="{{ route('news-details', $resentNew->slug) }}">
+                                                    <img src="{{ asset($resentNew->image) }}" alt=""
+                                                        class="img-fluid">
                                                 </a>
                                             </div>
                                             <div class="article__content">
                                                 <div class="article__category">
-                                                    {{$resentNew->category->name}}
+                                                    {{ $resentNew->category->name }}
                                                 </div>
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item">
-                                                <span class="text-primary">
-                                                  {{ $resentNew->author->name }}
-                                                </span>
+                                                        <span class="text-primary">
+                                                            {{ $resentNew->author->name }}
+                                                        </span>
                                                     </li>
                                                     <li class="list-inline-item">
-                                                <span class="text-dark text-capitalize">
-                                                   {{date('M d ,Y',strtotime($resentNew->created_at))}}
-                                                </span>
+                                                        <span class="text-dark text-capitalize">
+                                                            {{ date('M d ,Y', strtotime($resentNew->created_at)) }}
+                                                        </span>
                                                     </li>
                                                 </ul>
                                                 <h5>
-                                                    <a href="{{route('news-details',$resentNew->slug)}}">
-                                                        {{truncateText($resentNew->title)}}
+                                                    <a href="{{ route('news-details', $resentNew->slug) }}">
+                                                        {{ truncateText($resentNew->title) }}
                                                     </a>
                                                 </h5>
                                                 <p>
-                                                    {!! truncateText($resentNew->content,150) !!}
+                                                    {!! truncateText($resentNew->content, 150) !!}
                                                 </p>
                                                 <a href="#" class="btn btn-outline-primary mb-4 text-capitalize">
                                                     read more</a>
