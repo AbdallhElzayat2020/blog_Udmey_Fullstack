@@ -636,9 +636,10 @@
                                                     </a>
                                                 </h5>
                                                 <p>
-                                                    {!! truncateText($resentNew->content, 150) !!}
+                                                    {!! truncateText($resentNew->content, 40) !!}
                                                 </p>
-                                                <a href="#" class="btn btn-outline-primary mb-4 text-capitalize">
+                                                <a href="{{ route('news-details', $resentNew->slug) }}"
+                                                    class="btn btn-outline-primary mb-4 text-capitalize">
                                                     read more</a>
                                             </div>
                                         </div>
@@ -700,82 +701,13 @@
                             <h4 class="border_section">tags</h4>
                             <div class="blog-tags p-0">
                                 <ul class="list-inline">
-
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #property
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #sea
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #programming
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #sea
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #property
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #life style
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #technology
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #framework
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #sport
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #game
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #wfh
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #sport
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #game
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #wfh
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            #framework
-                                        </a>
-                                    </li>
+                                    @foreach ($mostCommontTags as $mostCommontTag)
+                                        <li class="list-inline-item">
+                                            <a href="">
+                                                #{{ $mostCommontTag->name }}  ({{ $mostCommontTag->count }})
+                                            </a>
+                                        </li>
+                                    @endforeach
 
                                 </ul>
                             </div>

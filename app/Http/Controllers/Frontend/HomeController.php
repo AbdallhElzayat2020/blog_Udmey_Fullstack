@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Tag;
 use App\Models\News;
-use App\Models\Admin;
-use App\Models\Language;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 /**
@@ -44,22 +43,55 @@ class HomeController extends Controller
      */
     public function showNews(string $slug)
     {
-        // Retrieve the news entry by its slug
+        /**
+         * Retrieve the news entry by its slug.
+         *
+         * @var \App\Models\News $news
+         */
         $news = News::with(['author', 'tags'])->where('slug', $slug)
             ->ActiveEntryis()->withLocalize()
             ->first();
 
-        $resentNews = News::with(['category','author'])->where('slug', '!=', $news->slug)
+        /**
+         * Retrieve 4 recent news entries excluding the current news entry.
+         *
+         * @var \Illuminate\Support\Collection $resentNews
+         */
+        $resentNews = News::with(['category', 'author'])->where('slug', '!=', $news->slug)
             ->ActiveEntryis()->withLocalize()->orderBy('id', 'DESC')->take(4)->get();
+
+        /**
+         * Retrieve the 15 most common tags.
+         *
+         * @var \Illuminate\Support\Collection $mostCommontTags
+         */
+        $mostCommontTags = $this->mostCommontTags();
 
         // Increment the news entry's view count
         $this->countView($news);
 
-        return view('frontEnd.news-details', compact('news', 'resentNews'));
+        return view('frontEnd.news-details', compact('news', 'resentNews', 'mostCommontTags'));
+    }
+
+    /**
+     * Retrieves the 15 most common tags.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function mostCommontTags()
+    {
+        return Tag::select('name', DB::raw('COUNT(*) as count'))
+            ->where('language', getLanguage())
+            ->groupBy('name')
+            ->orderByDesc('count')
+            ->take(15)
+            ->get();
     }
 
     /**
      * Increments the view count of a news entry.
+     *
+     * This method checks if the news entry has been viewed before and increments the view count accordingly.
      *
      * @param \App\Models\News $news The news entry to increment the view count for.
      * @return void

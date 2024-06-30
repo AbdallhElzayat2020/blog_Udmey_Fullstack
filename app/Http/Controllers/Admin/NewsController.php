@@ -87,6 +87,7 @@ class NewsController extends Controller
         foreach ($tags as $tag) {
             $item = new Tag();
             $item->name = $tag;
+            $item->language = $news->language;
             $item->save();
             $tagIds[] = $item->id;
         }
@@ -166,6 +167,7 @@ class NewsController extends Controller
         foreach ($tags as $tag) {
             $item = new Tag();
             $item->name = $tag;
+            $item->language = $news->language;
             $item->save();
             $tagIds[] = $item->id;
         }
@@ -192,16 +194,6 @@ class NewsController extends Controller
     /**
      * Copy News 
      */
-    // public function copyNews(string $id)
-    // {
-    //     $news = News::findOrFail($id);
-    //     $copyNews = $news->replicate();
-    //     // $copyNews->image = $news->image; // Ensure the image path is copied
-    //     $copyNews->save();
-
-    //     toast(__('Copied successfully'), 'success');
-    //     return redirect()->back();
-    // }
     public function copyNews($id)
     {
         // جلب البيانات الأصلية
