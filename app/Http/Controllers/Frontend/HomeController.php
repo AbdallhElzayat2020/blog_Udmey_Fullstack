@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Tag;
 use App\Models\News;
+use App\Models\Comment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * HomeController class handles the frontend homepage and news details routes.
@@ -14,18 +17,12 @@ class HomeController extends Controller
 {
     /**
      * Displays the homepage with breaking news.
-     *
      * This method retrieves the 5 latest breaking news entries and passes them to the homepage view.
-     *
-     * @return \Illuminate\View\View
-     * @example <http://example.com/> (Homepage with breaking news)
      */
     public function index()
     {
         /**
          * Retrieve the 5 latest breaking news entries.
-         *
-         * @var \Illuminate\Support\Collection $breakingNews
          */
         $breakingNews = News::where(['is_breaking_news' => 1,])
             ->ActiveEntryis()->WithLocalize()->orderBy('id', 'DESC')->take(5)->get();
@@ -33,37 +30,30 @@ class HomeController extends Controller
     }
 
     /**
-     * Displays a single news entry by its slug.
-     *
+     *Displays a single news entry by its slug.
+
      * This method retrieves a news entry by its slug and passes it to the news details view.
-     *
-     * @param string $slug The slug of the news entry.
-     * @return \Illuminate\View\View
-     * @example <http://example.com/news/some-news-slug> (News details page)
      */
     public function showNews(string $slug)
     {
+
         /**
          * Retrieve the news entry by its slug.
          *
          * @var \App\Models\News $news
          */
-        $news = News::with(['author', 'tags'])->where('slug', $slug)
+        $news = News::with(['author', 'tags', 'comments'])->where('slug', $slug)
             ->ActiveEntryis()->withLocalize()
             ->first();
 
         /**
          * Retrieve 4 recent news entries excluding the current news entry.
-         *
-         * @var \Illuminate\Support\Collection $resentNews
          */
         $resentNews = News::with(['category', 'author'])->where('slug', '!=', $news->slug)
             ->ActiveEntryis()->withLocalize()->orderBy('id', 'DESC')->take(4)->get();
 
         /**
          * Retrieve the 15 most common tags.
-         *
-         * @var \Illuminate\Support\Collection $mostCommontTags
          */
         $mostCommontTags = $this->mostCommontTags();
 
@@ -75,8 +65,6 @@ class HomeController extends Controller
 
     /**
      * Retrieves the 15 most common tags.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public function mostCommontTags()
     {
@@ -90,11 +78,6 @@ class HomeController extends Controller
 
     /**
      * Increments the view count of a news entry.
-     *
-     * This method checks if the news entry has been viewed before and increments the view count accordingly.
-     *
-     * @param \App\Models\News $news The news entry to increment the view count for.
-     * @return void
      */
     public function countView($news)
     {
@@ -116,5 +99,22 @@ class HomeController extends Controller
                 $news->increment('views');
             }
         }
+    }
+
+    //
+    public function handleComment(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'comment' => ['required', 'string', 'max:1000'],
+        ]);
+
+        $comment = new Comment();
+        $comment->news_id = $request->news_id;
+        $comment->user_id = Auth::user()->id;
+        $comment->parent_id = $request->parent_id;
+        $comment->comment = $request->comment;
+        $comment->save();
+        return redirect()->back();
     }
 }

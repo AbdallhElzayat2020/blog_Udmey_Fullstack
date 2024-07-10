@@ -55,7 +55,7 @@ class News extends Model
      * $category = $news->category;
      */
 
-     
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -87,5 +87,10 @@ class News extends Model
     public function author()
     {
         return $this->belongsTo(Admin::class);
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

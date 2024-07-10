@@ -83,13 +83,24 @@ function truncateText(string $text, int $limit = 20): string
  * @example convertTokFormat(1234) '1.2K'
  * @example convertTokFormat(1234567) '1.2M'
  */
+// function convertTokFormat(int $number): string
+// {
+//     if ($number < 1000) {
+//         return $number;
+//     } elseif ($number < 1000000) {
+//         return round($number / 1000, 1) . 'K';
+//     } else {
+//         return round($number / 1000000, 1) . 'M';
+//     }
+// }
+
 function convertTokFormat(int $number): string
 {
     if ($number < 1000) {
-        return $number;
-    } elseif ($number < 1000000) {
-        return round($number / 1000, 1) . 'K';
-    } else {
+        return (string) $number;
+    } elseif ($number >= 1000000) {
         return round($number / 1000000, 1) . 'M';
+    } else {
+        return round($number / 1000, 1) . 'K';
     }
 }

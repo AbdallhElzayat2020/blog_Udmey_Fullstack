@@ -192,7 +192,7 @@ class NewsController extends Controller
     }
 
     /**
-     * Copy News 
+     * Copy News
      */
     public function copyNews($id)
     {
