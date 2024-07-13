@@ -31,7 +31,6 @@ class HomeController extends Controller
 
     /**
      *Displays a single news entry by its slug.
-
      * This method retrieves a news entry by its slug and passes it to the news details view.
      */
     public function showNews(string $slug)
@@ -46,15 +45,10 @@ class HomeController extends Controller
             ->ActiveEntryis()->withLocalize()
             ->first();
 
-        /**
-         * Retrieve 4 recent news entries excluding the current news entry.
-         */
         $resentNews = News::with(['category', 'author'])->where('slug', '!=', $news->slug)
             ->ActiveEntryis()->withLocalize()->orderBy('id', 'DESC')->take(4)->get();
 
-        /**
-         * Retrieve the 15 most common tags.
-         */
+
         $mostCommontTags = $this->mostCommontTags();
 
         // Increment the news entry's view count
@@ -117,4 +111,19 @@ class HomeController extends Controller
         $comment->save();
         return redirect()->back();
     }
+
+//    public function handleReply(Request $request)
+//    {
+////        dd($request->all());
+//        $request->validate([
+//            'replay' => ['required', 'string', 'max:1000'],
+//        ]);
+//        $comment = new Comment();
+//        $comment->news_id = $request->news_id;
+//        $comment->user_id = Auth::user()->id;
+//        $comment->parent_id = $request->parent_id;
+//        $comment->comment = $request->replay;
+//        $comment->save();
+//        return redirect()->back();
+//    }
 }

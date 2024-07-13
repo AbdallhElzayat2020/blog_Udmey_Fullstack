@@ -193,31 +193,28 @@
                                         <aside class="comment-body">
                                             <div class="comment-meta">
                                                 <div class="comment-author vcard">
-                                                    <img src="" class="avatar" alt="image">
+                                                    {{--                                                    <img src="{{asset('frontend/assets/images/avatar.jpeg')}}"--}}
+                                                    <img src="{{asset('frontend/assets/images/avatar.jpeg')}}"
+                                                         class="avatar" alt="image">
                                                     <b class="fn">{{$comment->user->name}}</b>
                                                     <span class="says">says:</span>
                                                 </div>
                                                 <div class="comment-metadata">
-                                                    <a href="#">
+                                                    <a href="javascript:;">
                                                         <span>{{date('M,d Y H:i',strtotime($comment->created_at))}}</span>
                                                     </a>
                                                 </div>
                                             </div>
 
                                             <div class="comment-content">
-                                                <p>Lorem Ipsum has been the industry’s standard dummy text ever since
-                                                    the
-                                                    1500s,
-                                                    when an unknown
-                                                    printer took a galley of type and scrambled it to make a type
-                                                    specimen
-                                                    book.
+                                                <p>
+                                                    {{$comment->comment}}
                                                 </p>
                                             </div>
 
                                             <div class="reply">
                                                 <a href="#" class="comment-reply-link" data-toggle="modal"
-                                                   data-target="#exampleModal">Reply</a>
+                                                   data-target="#exampleModal-{{$comment->id}}">Reply</a>
                                                 <span>
                                                     <i class="fa fa-trash"></i>
                                                 </span>
@@ -229,7 +226,8 @@
                                                 <aside class="comment-body">
                                                     <div class="comment-meta">
                                                         <div class="comment-author vcard">
-                                                            <img src="images/news3.jpg" class="avatar" alt="image">
+                                                            <img src="{{asset('frontend/assets/images/avatar.jpeg')}}"
+                                                                 class="avatar" alt="testtest">
                                                             <b class="fn">Sinmun</b>
                                                             <span class="says">says:</span>
                                                         </div>
@@ -252,7 +250,7 @@
 
                                                     <div class="reply">
                                                         <a href="#" class="comment-reply-link" data-toggle="modal"
-                                                           data-target="#exampleModal">Reply</a>
+                                                           data-target="#exampleModal-{{$comment->id}}">Reply</a>
                                                         <span>
                                                             <i class="fa fa-trash"></i>
                                                         </span>
@@ -260,44 +258,10 @@
                                                 </aside>
                                             </li>
                                         </ol>
+
                                     </li>
                                 @endforeach
 
-
-                                <li class="comment">
-                                    <aside class="comment-body">
-                                        <div class="comment-meta">
-                                            <div class="comment-author vcard">
-                                                <img src="images/news4.jpg" class="avatar" alt="image">
-                                                <b class="fn">Sinmun</b>
-                                                <span class="says">says:</span>
-                                            </div>
-
-                                            <div class="comment-metadata">
-                                                <a href="#">
-                                                    <span>April 24, 2019 at 10:59 am</span>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="comment-content">
-                                            <p>Lorem Ipsum has been the industry’s standard dummy text ever since the
-                                                1500s,
-                                                when an unknown
-                                                printer took a galley of type and scrambled it to make a type specimen
-                                                book.
-                                            </p>
-                                        </div>
-
-                                        <div class="reply">
-                                            <a href="#" class="comment-reply-link" data-toggle="modal"
-                                               data-target="#exampleModal">Reply</a>
-                                            <span>
-                                                <i class="fa fa-trash"></i>
-                                            </span>
-                                        </div>
-                                    </aside>
-                                </li>
                             </ol>
 
                             <div class="comment-respond">
@@ -340,7 +304,8 @@
 
                     <!-- Modal -->
                     <div class="comment_modal">
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="exampleModal-{{$comment->id}}" tabindex="-1"
+                             aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -351,8 +316,12 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="#">
-                                            <textarea cols="30" rows="7" placeholder="Type. . ."></textarea>
+                                        <form action="{{route('news-comment-reply')}}" method="post">
+                                            @csrf
+                                            <textarea name="replay" cols="30" rows="7"
+                                                      placeholder="Type. . ."></textarea>
+                                            <input type="hidden" name="news_id" value="{{ $news->id }}">
+                                            <input type="hidden" name="parent_id" value="{{$comment->id}}">
                                             <button type="submit">submit</button>
                                         </form>
                                     </div>
@@ -360,6 +329,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Modal -->
 
                     <!-- end comment -->
 
