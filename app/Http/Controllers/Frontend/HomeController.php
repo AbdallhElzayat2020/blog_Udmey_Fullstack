@@ -112,18 +112,23 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-//    public function handleReply(Request $request)
-//    {
-////        dd($request->all());
-//        $request->validate([
-//            'replay' => ['required', 'string', 'max:1000'],
-//        ]);
-//        $comment = new Comment();
-//        $comment->news_id = $request->news_id;
-//        $comment->user_id = Auth::user()->id;
-//        $comment->parent_id = $request->parent_id;
-//        $comment->comment = $request->replay;
-//        $comment->save();
-//        return redirect()->back();
-//    }
+    public function handleReply(Request $request)
+    {
+//        dd($request->all());
+        $request->validate([
+            'replay' => ['required', 'string', 'max:1000'],
+        ]);
+        $comment = new Comment();
+        $comment->news_id = $request->news_id;
+        $comment->user_id = Auth::user()->id;
+        $comment->parent_id = $request->parent_id;
+        $comment->comment = $request->replay;
+        $comment->save();
+        return redirect()->back();
+    }
+
+    public function commentDelete(Request $request)
+    {
+        dd($request->all());
+    }
 }

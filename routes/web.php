@@ -32,18 +32,18 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
 require __DIR__ . '/auth.php';
-
 
 
 //invoke controller for Language
 Route::get('language', LanguageController::class)->name('language');
 
 // News Details Route
-Route::get('news-details/{slug}',[HomeController::class, 'showNews'])->name('news-details');
+Route::get('news-details/{slug}', [HomeController::class, 'showNews'])->name('news-details');
 
 // News Comment Route
-Route::post('news-comment',[HomeController::class, 'handleComment'])->name('news-comment');
+Route::post('news-comment', [HomeController::class, 'handleComment'])->name('news-comment');
+// News Comment Replay Route
 
-Route::post('news-comment-reply',[HomeController::class, 'handleReply'])->name('news-comment-reply');
+Route::post('news-comment-reply', [HomeController::class, 'handleReply'])->name('news-comment-reply');
+Route::delete('news-comment-delete', [HomeController::class, 'commentDelete'])->name('news-comment-delete');

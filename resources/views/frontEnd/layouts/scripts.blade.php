@@ -1,4 +1,6 @@
 <script type="text/javascript" src="{{ asset('frontend/assets/js/index.bundle.js') }}"></script>
+{{--sweet Alert--}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @yield('js')
 <script>
     $(document).ready(function () {
