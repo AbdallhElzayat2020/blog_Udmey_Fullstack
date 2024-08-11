@@ -35,7 +35,6 @@ class HomeController extends Controller
      */
     public function showNews(string $slug)
     {
-
         /**
          * Retrieve the news entry by its slug.
          *
@@ -47,7 +46,6 @@ class HomeController extends Controller
 
         $resentNews = News::with(['category', 'author'])->where('slug', '!=', $news->slug)
             ->ActiveEntryis()->withLocalize()->orderBy('id', 'DESC')->take(4)->get();
-
 
         $mostCommontTags = $this->mostCommontTags();
 

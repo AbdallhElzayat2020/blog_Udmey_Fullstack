@@ -90,6 +90,7 @@ class NewsController extends Controller
             $item->language = $news->language;
             $item->save();
             $tagIds[] = $item->id;
+
         }
 
         $news->tags()->attach($tagIds);

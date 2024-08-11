@@ -789,6 +789,5 @@
                 });
             });
         })
-
     </script>
 @endsection

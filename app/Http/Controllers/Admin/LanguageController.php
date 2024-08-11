@@ -81,6 +81,7 @@
         /**
          * Update the specified resource in storage.
          */
+
         public function update( AdminLanguageUpdateRequest $request , string $id )
         {
             $language = Language::findorFail($id);

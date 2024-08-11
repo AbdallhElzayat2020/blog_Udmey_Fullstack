@@ -25,24 +25,28 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('reset-password/{token}', [AdminAuthController::class, 'resetPassword'])->name('reset-password');
 
     Route::post('reset-password', [AdminAuthController::class, 'handleResetPassword'])->name('reset-password.send');
-
 });
 //Protected Routes
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
+Route::group(
+    [
+        'prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']
+    ],
+    function () {
 
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    //Profile Route
-    Route::put('profile-password/{id}', [AdminProfileController::class, 'passwordUpdate'])->name('profile-password.update');
+        //Profile Route
+        Route::put('profile-password/{id}', [AdminProfileController::class, 'passwordUpdate'])->name('profile-password.update');
 
-    Route::resource('profile', AdminProfileController::class);
-    //Language Route
-    Route::resource('language', LanguageController::class);
-    //Category Route
-    Route::resource('category', CategoryController::class);
-    //News Route
-    Route::get('fetch-new-category', [NewsController::class, 'fetchCategory'])->name('fetch-new-category');
-    Route::get('toggle-news-status', [NewsController::class, 'toggleNewsStatus'])->name('toggle-news-status');
-    Route::get('news-copy/{id}', [NewsController::class, 'copyNews'])->name('news-copy');
-    Route::resource('news', NewsController::class);
-});
+        Route::resource('profile', AdminProfileController::class);
+        //Language Route
+        Route::resource('language', LanguageController::class);
+        //Category Route
+        Route::resource('category', CategoryController::class);
+        //News Route
+        Route::get('fetch-new-category', [NewsController::class, 'fetchCategory'])->name('fetch-new-category');
+        Route::get('toggle-news-status', [NewsController::class, 'toggleNewsStatus'])->name('toggle-news-status');
+        Route::get('news-copy/{id}', [NewsController::class, 'copyNews'])->name('news-copy');
+        Route::resource('news', NewsController::class);
+    }
+);
